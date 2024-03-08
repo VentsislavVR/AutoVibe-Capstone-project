@@ -28,6 +28,6 @@ urlpatterns = [
     path('common/',include('autovibe_project.common.urls')),
     path('cars/',include('autovibe_project.cars.urls')),
 ]
-
-urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 handler404 = Error404View.as_view()
