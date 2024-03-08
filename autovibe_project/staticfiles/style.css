@@ -109,3 +109,87 @@ nav .social a i:hover{
 .hero .text .btn:hover{
     background-color: transparent;
 }
+.hero .text h4 {
+    color: #dd0707; /* Red */
+}
+
+.hero .text h1,
+.hero .text h3 {
+    color: #dd0707; /* Red */
+}
+
+.hero .text p {
+    color: #fff; /* White */
+}
+
+.hero .text a {
+    color: red; /* Red */
+}
+
+.small-image {
+    width: 75px; /* Adjust width as needed */
+    border-radius: 100%;
+    height: auto; /* Maintain aspect ratio */
+}
+
+.form-row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.form-group {
+    margin-bottom: 10px;
+    flex: 1;
+    margin-right: 10px; /* Add some spacing between form groups */
+}
+
+.form-group:last-child {
+    margin-right: 0; /* Remove margin-right from the last form group */
+}
+
+.form-group label {
+    display: block;
+    font-weight: bold;
+    color: #dd0707; /* Red color */
+}
+/*Todo fix this monster and/or hide it!!*/
+.form-group input[type="email"][name="email"],
+.form-group input[type="password"][name="password1"],
+.form-group input[type="password"][name="password2"],
+.form-group input[type="text"][name="username"],
+.form-group input[type="password"][name="password"]{
+    width: 30%; /* Set the width to 100% */
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    height: 40px; /* Set the same height for both fields */
+}
+
+.btn {
+    padding: 10px 30px;
+    background-color: #dd0707;
+    color: #fff;
+    font-weight: bold;
+    border-radius: 30px;
+    border: 2px solid #dd0707;
+    transition: 0.3s;
+}
+
+.btn:hover {
+    background-color: transparent;
+}
+
+.logout-form {
+    text-align: left;
+}
+
+.logout-form p.text {
+    margin-left: 0;
+    margin-bottom: 20px;
+}
+
+/*.logout-form button.btn {*/
+/*    display: block;*/
+/*    margin: 0 auto;*/
+/*}*/

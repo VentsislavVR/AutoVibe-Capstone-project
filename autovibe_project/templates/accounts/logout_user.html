@@ -3,7 +3,7 @@
     <div class="hero">
         <div class="text">
             <h4>Logout</h4>
-            <form action="{% url 'logout_user' %}" method="post">
+            <form action="{% url 'logout_user' %}" method="post" class="logout-form">
                 {% csrf_token %}
                 <p class="text">Are you sure you want to logout?</p>
                 

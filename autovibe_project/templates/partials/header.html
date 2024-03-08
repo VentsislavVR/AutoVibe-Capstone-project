@@ -1,24 +1,30 @@
 {% load static %}
 <header>
-        <nav>
+    <nav>
+        <a href="{% url 'index' %}">
             <img src="{% static 'img/car-logo.png' %}" class="logo" alt="">
-            <div class="menu">
-                <a href="#">Home</a>
-                <a href="#">About</a>
-                <a href="#">Blog</a>
-                <a href="#">Contact</a>
-                <a href="{% url 'login_user' %}">Login</a>
-                <a href="{% url 'register_user' %}">Register</a>
-                <a href="{% url 'logout_user' %}">Logout</a>
-                <a href="#"><i class="fa-solid fa-magnifying-glass"></i></a>
-                <a href="#"><i class="fa-solid fa-cart-shopping"></i></a>
-                <h1 style="color: white">{{ request.user }}</h1>
-            </div>
+        </a>
+        <div class="menu">
+            <a href="{% url 'index' %}">Home</a>
+            <a href="{% url 'about_page' %}">About</a>
+            <a href="#">Blog</a>
+            <a href="#">Contact</a>
+            {% if not request.user.is_authenticated %}
+            <a href="{% url 'login_user' %}">Login</a>
+            <a href="{% url 'register_user' %}">Register</a>
+            <a href="#"><i class="fa-solid fa-magnifying-glass"></i></a>
+            {% else %}
+             <a href="{% url 'logout_user' %}">Logout</a>
+             <a href="#"><i class="fa-solid fa-cart-shopping"></i></a>
+            {% endif %}
+            <hr>
+            <h1 style="color: white">{{ request.user }}</h1>
+        </div>
 
-            <div class="social">
-                <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
-                <a href="#"><i class="fa-brands fa-twitter"></i></a>
-                <a href="#"><i class="fa-brands fa-instagram"></i></a>
-            </div>
-        </nav>
-    </header>
+        <div class="social">
+            <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+            <a href="#"><i class="fa-brands fa-twitter"></i></a>
+            <a href="#"><i class="fa-brands fa-instagram"></i></a>
+        </div>
+    </nav>
+</header>
