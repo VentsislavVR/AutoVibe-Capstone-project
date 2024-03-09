@@ -2,6 +2,7 @@ from django.core.validators import MinLengthValidator
 # Create your views here.
 from django.db import models
 
+from autovibe_project.accounts.models import Profile
 from autovibe_project.cars.validators import get_current_year_plus_one
 
 
@@ -25,15 +26,22 @@ class CarBrand(models.Model):
             MinLengthValidator(MIN_COUNTRY_OF_ORIGIN_LENGTH),
         ])
 
-    logo = models.ImageField(
-        upload_to='brand_logos/',
+    logo = models.URLField(
+        max_length=220,
+
     )
+    description = models.TextField(
+        max_length=500,
+        null=True,
+        blank=True
+    )
+
 
     def __str__(self):
         return self.brand_name
 
 
-class Car(models.Model):
+class CarPost(models.Model):
     MAX_MODEL_LENGTH = 100
     MIN_MODEL_LENGTH = 2
 
@@ -45,6 +53,8 @@ class Car(models.Model):
 
 
     brand = models.ForeignKey(CarBrand, on_delete=models.CASCADE)
+    profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
+
     model = models.CharField(
         max_length=MAX_MODEL_LENGTH,
         validators=[
@@ -52,9 +62,7 @@ class Car(models.Model):
         ]
     )
     year = models.PositiveIntegerField(
-        validators=[
-            get_current_year_plus_one,
-        ]
+        validators=[get_current_year_plus_one],
     )
     color = models.CharField(
         max_length=MAX_COLOR_LENGTH,
@@ -92,7 +100,9 @@ class Car(models.Model):
         return f"{self.year} {self.brand} {self.model}"
 
 
-class CarFeature(models.Model):
+
+
+class CarFeaturePost(models.Model):
     MAX_FEATURE_LENGTH = 100
     MIN_FEATURE_LENGTH = 2
 
@@ -144,7 +154,7 @@ class CarFeature(models.Model):
 
     ]
 
-    car = models.ForeignKey(Car, on_delete=models.CASCADE)
+    car = models.ForeignKey(CarPost, on_delete=models.CASCADE)
 
     interior_features = models.CharField(
         max_length=100,
