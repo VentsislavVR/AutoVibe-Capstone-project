@@ -1,10 +1,40 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'base.html' %}
+{% load static %}
 
-</body>
-</html>
+{% block title %}
+    Profile Details - Cars
+{% endblock %}
+
+{% block content %}
+    <section class="hero">
+        <div class="text">
+            {% if object.user.profile.profile_picture %}
+                <img class="small-image" src="{{ object.profile_picture.url }}" alt="Profile Image">
+            {% else %}
+                <img class="small-image" src="{% static 'img/dummy_user.jpg' %}" alt="Profile Image">
+            {% endif %}
+            <hr>
+
+            <!-- Profile Info -->
+
+            <h4><span class="red-text">Name:</span> <span class="white-text">{{ object.user.profile.full_name }}</span>
+            </h4>
+            <h4><span class="red-text">Email:</span> <span class="white-text">{{ object.user.email }}</span></h4>
+            <h4><span class="red-text">Date of Birth:</span> <span
+                    class="white-text">{{ object.date_of_birth|default:"" }}</span></h4>
+            <h4><span class="red-text">Telephone Number:</span> <span
+                    class="white-text">{{ object.telephone_number|default:"" }}</span></h4>
+            <h4><span class="red-text">Member Since:</span> <span
+                    class="white-text">{{ object.user.date_joined|date:"SHORT_DATE_FORMAT" }}</span></h4>
+            <hr>
+            <!-- Buttons for Editing and Deleting the Profile -->
+            <div class="form-row">
+                <a class="btn sell-btn" href="{% url 'profile_update' object.pk %}">Edit Profile</a>
+                <a class="btn" href="{% url 'profile_delete' object.pk %}">Delete Profile</a>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+/*Todo add more data, car listing 
+Maybe wish list
+*/

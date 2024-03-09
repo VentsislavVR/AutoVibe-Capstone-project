@@ -48,3 +48,5 @@ class ProfileBaseForm(forms.ModelForm):
             raise forms.ValidationError("You can only upload one profile picture.")
 
         return profile_picture
+class ProfileUpdateForm(ProfileBaseForm):
+    pass

@@ -2,11 +2,11 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import views as auth_views, login, logout
 from django.urls import reverse_lazy
 from django.views import generic as views
+from django.contrib.auth import mixins as auth_mixins
 from django.utils.translation import gettext_lazy as _
 
-
-
-from autovibe_project.accounts.forms import AutoVibeUserCreationForm
+from autovibe_project.accounts.forms import AutoVibeUserCreationForm, ProfileUpdateForm
+from autovibe_project.accounts.models import Profile
 
 
 # Create your views here.
@@ -45,10 +45,18 @@ class LogoutUserView(auth_views.LogoutView):
 
 
 
-class ProfileDetailsView():
-    ...
-class ProfileUpdateView():
-    ...
+class ProfileDetailsView(auth_mixins.LoginRequiredMixin,views.DetailView):
+    queryset = Profile.objects.prefetch_related('user').all()
+    template_name = 'accounts/details_profile.html'
 
-class ProfileDeleteView():
+class ProfileUpdateView(views.UpdateView):
+    queryset = Profile.objects.prefetch_related('user').all()
+    template_name = 'accounts/edit_profile.html'
+    form_class = ProfileUpdateForm
+
+    def get_success_url(self):
+        return reverse_lazy('profile_details', kwargs={'pk': self.object.pk})
+
+
+class ProfileDeleteView(views.DeleteView):
     ...

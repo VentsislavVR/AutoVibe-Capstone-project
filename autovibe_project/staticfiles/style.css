@@ -106,6 +106,15 @@ nav .social a i:hover{
     border: 2px solid #dd0707;
     transition: 0.3s;
 }
+.hero .text .btn.sell-btn{
+    margin: 25px;
+}
+
+
+
+
+
+
 .hero .text .btn:hover{
     background-color: transparent;
 }
@@ -193,3 +202,8 @@ nav .social a i:hover{
 /*    display: block;*/
 /*    margin: 0 auto;*/
 /*}*/
+
+.white-text {
+    color: white;
+    margin-left: 5px;
+}
