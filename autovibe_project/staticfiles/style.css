@@ -207,3 +207,8 @@ nav .social a i:hover{
     color: white;
     margin-left: 5px;
 }
+
+
+.red-text {
+    color: red;
+}

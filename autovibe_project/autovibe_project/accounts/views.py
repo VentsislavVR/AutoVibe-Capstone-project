@@ -59,4 +59,7 @@ class ProfileUpdateView(views.UpdateView):
 
 
 class ProfileDeleteView(views.DeleteView):
-    ...
+    queryset = Profile.objects.prefetch_related('user').all()
+    template_name = 'accounts/delete_profile.html'
+
+    success_url = reverse_lazy('index')

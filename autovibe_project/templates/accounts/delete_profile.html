@@ -1,10 +1,22 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'base.html' %}
+{% load static %}
 
-</body>
-</html>
+{% block title %}
+    Delete Profile - Cars
+{% endblock %}
+
+{% block content %}
+    <section class="hero">
+        <div class="text">
+            <form action="{% url 'profile_delete' pk=object.pk %}" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <h1><span class="white-text">Are you sure you want to</span><span class="red-text"> delete </span><span
+                        class="white-text">your profile?</span></h1>
+                <div class="form-row">
+                    <button class="btn">Yes</button>
+                    <a class="btn" href="javascript:history.back()">Go Back</a>
+                </div>
+            </form>
+        </div>
+    </section>
+{% endblock %}

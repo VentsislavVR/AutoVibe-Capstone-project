@@ -50,3 +50,4 @@ class ProfileBaseForm(forms.ModelForm):
         return profile_picture
 class ProfileUpdateForm(ProfileBaseForm):
     pass
+
