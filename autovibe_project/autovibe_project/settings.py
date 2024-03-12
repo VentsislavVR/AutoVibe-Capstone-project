@@ -40,9 +40,11 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'autovibe_project.accounts',
-    'autovibe_project.cars',
     'autovibe_project.common',
     'autovibe_project.home',
+    'autovibe_project.blog',
+    'autovibe_project.shop',
+    'autovibe_project.carpost',
 
 ]
 
