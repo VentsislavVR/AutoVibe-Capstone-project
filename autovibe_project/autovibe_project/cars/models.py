@@ -1,3 +1,4 @@
+from django.contrib.auth import get_user_model
 from django.core.validators import MinLengthValidator
 # Create your views here.
 from django.db import models
@@ -5,7 +6,7 @@ from django.db import models
 from autovibe_project.accounts.models import Profile
 from autovibe_project.cars.validators import get_current_year_plus_one
 
-
+UserModel = get_user_model()
 class CarBrand(models.Model):
     MAX_BRAND_NAME_LENGTH = 100
     MIN_BRAND_NAME_LENGTH = 2
@@ -53,7 +54,9 @@ class CarPost(models.Model):
 
 
     brand = models.ForeignKey(CarBrand, on_delete=models.CASCADE)
-    profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
+    user = models.ForeignKey(UserModel, on_delete=models.CASCADE)
+    features = models.ManyToManyField('CarFeaturePost', blank=True)
+
 
     model = models.CharField(
         max_length=MAX_MODEL_LENGTH,
@@ -154,7 +157,7 @@ class CarFeaturePost(models.Model):
 
     ]
 
-    car = models.ForeignKey(CarPost, on_delete=models.CASCADE)
+
 
     interior_features = models.CharField(
         max_length=100,

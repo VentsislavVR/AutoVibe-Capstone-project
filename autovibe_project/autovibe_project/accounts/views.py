@@ -49,6 +49,11 @@ class ProfileDetailsView(auth_mixins.LoginRequiredMixin,views.DetailView):
     queryset = Profile.objects.prefetch_related('user').all()
     template_name = 'accounts/details_profile.html'
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['car_posts_count'] = self.object.user.carpost_set.count()
+        return context
+
 class ProfileUpdateView(views.UpdateView):
     queryset = Profile.objects.prefetch_related('user').all()
     template_name = 'accounts/edit_profile.html'
@@ -63,3 +68,4 @@ class ProfileDeleteView(views.DeleteView):
     template_name = 'accounts/delete_profile.html'
 
     success_url = reverse_lazy('index')
+

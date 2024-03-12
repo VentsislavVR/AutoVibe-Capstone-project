@@ -26,6 +26,10 @@
                     class="white-text">{{ object.telephone_number|default:"" }}</span></h4>
             <h4><span class="red-text">Member Since:</span> <span
                     class="white-text">{{ object.user.date_joined|date:"SHORT_DATE_FORMAT" }}</span></h4>
+            
+        
+            <h4><span class="red-text">Number of car posts:</span> <span class="white-text">{{ car_posts_count }}</span></h4>
+
             <hr>
             <!-- Buttons for Editing and Deleting the Profile -->
             <div class="form-row">

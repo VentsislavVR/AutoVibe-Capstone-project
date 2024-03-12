@@ -1,10 +1,41 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'base.html' %}
+{% load static %}
 
-</body>
-</html>
+{% block title %}
+    Car Details
+{% endblock %}
+
+{% block content %}
+<section class="hero">
+    <div class="text">
+        <div class="car-details">
+            <div class="car-info">
+                <h1 style="color: white;">{{ object.brand }}</h1>
+                <ul>
+                    <li><strong style="color: red;">Model:</strong> <span style="color: white;">{{ object.model }}</span></li>
+                    <li><strong style="color: red;">Year:</strong> <span style="color: white;">{{ object.year }}</span></li>
+                    <li><strong style="color: red;">Color:</strong> <span style="color: white;">{{ object.color }}</span></li>
+                    <li><strong style="color: red;">Price:</strong> <span style="color: white;">{{ object.price }}</span></li>
+                    <li><strong style="color: red;">Mileage:</strong> <span style="color: white;">{{ object.mileage }}</span></li>
+                    <li><strong style="color: red;">VIN:</strong> <span style="color: white;">{{ object.vin }}</span></li>
+                    <li><strong style="color: red;">Description:</strong> <span style="color: white;">{{ object.description }}</span></li>
+                </ul>
+                <h3 style="color: red;">Features:</h3>
+                <ul>
+                    <li><strong style="color: red;">Interior Features:</strong> <span style="color: white;">{{ object.carfeaturepost.interior_features }}</span></li>
+                    <li><strong style="color: red;">Exterior Features:</strong> <span style="color: white;">{{ object.carfeaturepost.exterior_features }}</span></li>
+                    <li><strong style="color: red;">Safety Features:</strong> <span style="color: white;">{{ object.carfeaturepost.safety_features }}</span></li>
+                    <li><strong style="color: red;">Other Features:</strong> <span style="color: white;">{{ object.carfeaturepost.other_features }}</span></li>
+                </ul>
+            </div>
+            <div class="car-image">
+                <img src="{{ object.image.url }}" alt="Car Image">
+            </div>
+        </div>
+        <div class="form-row">
+            <a class="btn" href="{% url 'update_car_post' object.pk %}">Edit</a>
+            <a class="btn" href="{% url 'delete_car_post' object.pk %}">Delete</a>
+        </div>
+    </div>
+</section>
+{% endblock %}

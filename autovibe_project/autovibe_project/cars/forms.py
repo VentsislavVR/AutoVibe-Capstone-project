@@ -45,6 +45,24 @@ from betterforms.multiform import MultiModelForm
 #             'safety_features': forms.CheckboxSelectMultiple,
 #         }
 #
+
+
+# interior_features = forms.MultipleChoiceField(
+#     choices=CarFeaturePost.INTERIOR_FEATURES_CHOICES,
+#     widget=forms.CheckboxSelectMultiple,
+#     required=False
+# )
+# exterior_features = forms.MultipleChoiceField(
+#     choices=CarFeaturePost.EXTERIOR_FEATURES_CHOICES,
+#     widget=forms.CheckboxSelectMultiple,
+#     required=False
+# )
+# safety_features = forms.MultipleChoiceField(
+#     choices=CarFeaturePost.SAFETY_FEATURES_CHOICES,
+#     widget=forms.CheckboxSelectMultiple,
+#     required=False
+# )
+
 class CarBrandForm(forms.ModelForm):
 
     class Meta:
@@ -60,7 +78,15 @@ class CarFeaturePostForm(forms.ModelForm):
         model = CarFeaturePost
         fields = ['interior_features', 'exterior_features', 'safety_features', 'other_features']
 
-class UserProfileMultiForm(MultiModelForm):
+        widgets = {
+                    'interior_features': forms.CheckboxSelectMultiple,
+                    'exterior_features': forms.CheckboxSelectMultiple,
+                    'safety_features': forms.CheckboxSelectMultiple,
+                }
+
+
+
+class CarMultiForm(MultiModelForm):
     form_classes = {
         'form': CarPostForm,
         'carfeaturepost': CarFeaturePostForm,
