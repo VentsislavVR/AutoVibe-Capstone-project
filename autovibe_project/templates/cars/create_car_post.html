@@ -1,127 +1,35 @@
-{#{% extends 'base.html' %}#}
-{##}
-{#{% block content %}#}
-{#<div class="hero">#}
-{#    <div class="text">#}
-{#        <h4>Create Car Listing</h4>#}
-{#        <form method="post" action="{% url 'create_car_post' %}" enctype="multipart/form-data">#}
-{#            {% csrf_token %}#}
-{#            <div class="form-row">#}
-{#                <div class="form-group">#}
-{#                    {{ car_brand_form.brand.label_tag }}#}
-{#                    {{ car_brand_form.brand_name }}  #}
-{#                </div>#}
-{#            </div>#}
-{#            <div class="form-row">#}
-{#                <div class="form-group">#}
-{#                    {{ form.model.label_tag }}#}
-{#                    {{ form.model }}#}
-{#                </div>#}
-{##}
-{#                <div class="form-group">#}
-{#                    {{ form.year.label_tag }}#}
-{#                    {{ form.year }}#}
-{#                </div>#}
-{#            </div>#}
-{#            <div class="form-row">#}
-{#                <div class="form-group">#}
-{#                    {{ form.color.label_tag }}#}
-{#                    {{ form.color }}#}
-{#                </div>#}
-{#                <div class="form-group">#}
-{#                    {{ form.price.label_tag }}#}
-{#                    {{ form.price }}#}
-{#                </div>#}
-{#            </div>#}
-{#            <div class="form-row">#}
-{#                <div class="form-group">#}
-{#                    {{ form.mileage.label_tag }}#}
-{#                    {{ form.mileage }}#}
-{#                </div>#}
-{#                <div class="form-group">#}
-{#                    {{ form.vin.label_tag }}#}
-{#                    {{ form.vin }}#}
-{#                </div>#}
-{#            </div>#}
-{#            <div class="form-row">#}
-{#                <div class="form-group">#}
-{#                    {{ form.description.label_tag }}#}
-{#                    {{ form.description }}#}
-{#                </div>#}
-{#                <div class="form-group">#}
-{#                    {{ form.image.label_tag }}#}
-{#                    {{ form.image }}#}
-{#                </div>#}
-{#            </div>#}
-{#            <div class="form-row">#}
-{#                <div class="form-group">#}
-{#                    {{ car_feature_form.interior_features.label_tag }}#}
-{#                    {{ car_feature_form.interior_features }}#}
-{#                </div>#}
-{#                <div class="form-group">#}
-{#                    {{ car_feature_form.exterior_features.label_tag }}#}
-{#                    {{ car_feature_form.exterior_features }}#}
-{#                </div>#}
-{#            </div>#}
-{#            <div class="form-row">#}
-{#                <div class="form-group">#}
-{#                    {{ car_feature_form.safety_features.label_tag }}#}
-{#                    {{ car_feature_form.safety_features }}#}
-{#                </div>#}
-{#                <div class="form-group">#}
-{#                    {{ car_feature_form.other_features.label_tag }}#}
-{#                    {{ car_feature_form.other_features }}#}
-{#                </div>#}
-{#            </div>#}
-{#            <div class="form-row">#}
-{#                <button type="submit" class="btn">Create Listing</button>#}
-{#            </div>#}
-{#        </form>#}
-{#    </div>#}
-{#</div>#}
-{#{% endblock %}#}
-{##}
+{% extends "base.html" %}
+{% load crispy_forms_filters %}
+{% load i18n %}
 
-{% extends 'base.html' %}
+{% block head %}
+    {{ wizard.form.media }}
+{% endblock %}
 
 {% block content %}
-<div class="hero">
+    <div class="hero">
     <div class="text">
-        <h4>Create Car Listing</h4>
-        <form method="post" action="{% url 'create_car_post' %}" enctype="multipart/form-data">
-            {% csrf_token %}
-            {{ form.non_field_errors }}
-
-            <!-- Render other form fields -->
-            {% for field in form.visible_fields %}
-                <div class="form-group">
-                    {{ field.label_tag }}
-                    {{ field }}
-                    {% if field.help_text %}
-                        <small class="form-text text-muted">{{ field.help_text }}</small>
-                    {% endif %}
-                    {% for error in field.errors %}
-                        <div class="invalid-feedback">{{ error }}</div>
-                    {% endfor %}
-                </div>
-            {% endfor %}
-
-            <!-- Render the features field separately -->
-            <div class="form-group">
-                {{ form.features.label_tag }}
-                {% for feature in form.features %}
-                    <div class="form-check">
-                        {{ feature }}
-                        <label class="form-check-label" for="{{ feature.id_for_label }}">{{ feature.choice_label }}</label>
-                    </div>
+    <p class="red-text">Step {{ wizard.steps.step1 }} of {{ wizard.steps.count }}</p>
+    <form  enctype="multipart/form-data" action="" method="post">{% csrf_token %} 
+        <table>
+            {{ wizard.management_form }}
+            {% if wizard.form.forms %}
+                {{ wizard.form.management_form }}
+                {% for form in wizard.form.forms %}
+                    {{ form|crispy }}
                 {% endfor %}
-                {% for error in form.features.errors %}
-                    <div class="invalid-feedback">{{ error }}</div>
-                {% endfor %}
-            </div>
-
-            <button type="submit" class="btn btn-primary">Create Car Post</button>
-        </form>
+            {% else %}
+                {{ wizard.form}}
+            {% endif %}
+        </table>
+        {% if wizard.steps.prev %}
+            <button class="red-text" name="wizard_goto_step" type="submit"
+                    value="{{ wizard.steps.first }}">{% translate "first step" %}</button>
+            <button class="red-text" name="wizard_goto_step" type="submit"
+                    value="{{ wizard.steps.prev }}">{% translate "prev step" %}</button>
+        {% endif %}
+        <input type="submit" value="{% translate "submit" %}"/>
+    </form>
     </div>
-</div>
+    </div>
 {% endblock %}

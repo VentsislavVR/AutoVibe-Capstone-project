@@ -39,6 +39,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    'multiselectfield',
+    'crispy_forms',
+    'formtools',
+
     'autovibe_project.accounts',
     'autovibe_project.common',
     'autovibe_project.home',
@@ -47,6 +51,8 @@ INSTALLED_APPS = [
     'autovibe_project.carpost',
 
 ]
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
