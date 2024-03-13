@@ -292,7 +292,7 @@ class CarPost(models.Model):
     )
     image = models.ImageField(upload_to='car_images/')
 
-    # user = models.OneToOneField(UserModel, on_delete=models.CASCADE)
+    user = models.ForeignKey(UserModel, on_delete=models.CASCADE)
 
     car_model = models.ForeignKey(
         CarModel,

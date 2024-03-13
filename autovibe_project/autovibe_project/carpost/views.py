@@ -46,8 +46,11 @@ class CreateCarPostWizardView(auth_mixins.LoginRequiredMixin,SessionWizardView):
         car_post.car_model = car_model_instance
         car_post.save()
 
-        car_features = form_list[2].save(commit=False)
+        car_features = form_list[2].save()
         car_features.save()
+
+        car_post.car_feature.add(car_features)
+        print(car_post.car_feature.set)
 
         return redirect(reverse_lazy('index'))
 
