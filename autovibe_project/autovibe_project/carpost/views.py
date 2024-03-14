@@ -2,19 +2,19 @@ from django.core.exceptions import ValidationError
 from django.core.files.storage import FileSystemStorage
 from django.db.models import Q
 from django.http import HttpResponse
-from django.shortcuts import redirect
+from django.shortcuts import redirect, get_object_or_404
 from django.urls import reverse_lazy
 from django.views import generic as views
 from formtools.wizard.views import SessionWizardView
 from django.contrib.auth import mixins as auth_mixins
 
-from autovibe_project.carpost.forms import CarBrandModelForm, CarPostForm, CarFeaturesForm
-from autovibe_project.carpost.models import CarModel, CarPost
+from autovibe_project.carpost.forms import CarBrandModelForm, CarPostForm, CarFeaturesForm, CarUpdateForm
+from autovibe_project.carpost.models import CarModel, CarPost, CarFeatures
 
 
-#Todo maybe add xondition for 3rd form
+# Todo maybe add xondition for 3rd form
 
-class CreateCarPostWizardView(auth_mixins.LoginRequiredMixin,SessionWizardView):
+class CreateCarPostWizardView(auth_mixins.LoginRequiredMixin, SessionWizardView):
     template_name = 'cars/create_car_post.html'
     file_storage = FileSystemStorage(location='/mediafiles/car_images')
     form_list = [
@@ -23,6 +23,7 @@ class CreateCarPostWizardView(auth_mixins.LoginRequiredMixin,SessionWizardView):
         CarFeaturesForm,
 
     ]
+
     # def get_success_url(self):
     #     return reverse_lazy('details_car_post',
     #                         kwargs={'pk': self.object.pk})
@@ -61,19 +62,19 @@ class CreateCarPostWizardView(auth_mixins.LoginRequiredMixin,SessionWizardView):
 
 
 class CarPostListView(views.ListView):
-    queryset = CarPost.objects.all()\
+    queryset = CarPost.objects.all() \
         .prefetch_related('car_feature', 'car_model')
 
     template_name = 'cars/list_car.html'
+
     # paginate_by = 10
-
-
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['query'] = self.request.GET.get('q') or ''
 
         return context
+
     def get_queryset(self):
         queryset = super().get_queryset()
         query = self.request.GET.get('q')
@@ -124,7 +125,15 @@ class DetailsCarView(views.DetailView):
 
 
 class UpdateCarView(views.UpdateView):
-    pass
+    template_name = 'cars/update_car_post.html'
+    queryset = (CarPost.objects.all()
+                .prefetch_related('car_feature', 'car_model'))
+
+    form_class = CarUpdateForm
+
+    def get_success_url(self):
+        return reverse_lazy('details_car_post', kwargs={'pk': self.object.pk})
+
 
 
 class DeleteCarView(views.DeleteView):

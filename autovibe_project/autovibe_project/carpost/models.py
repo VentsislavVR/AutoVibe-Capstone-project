@@ -37,7 +37,7 @@ class MultiSelectField(MSField):
 #     image = models.ImageField(upload_to='logos/')
 
 
-
+# Todo maybe use for blog articles which
 class CarBrands(models.Model):
     BRAND_CHOICES = [
         ('ACURA', 'ACURA'),
@@ -86,7 +86,11 @@ class CarBrands(models.Model):
         ('VOLVO', 'VOLVO'),
     ]
 
-    brand_name = models.CharField(max_length=100, choices=BRAND_CHOICES)
+    brand_name = models.CharField(
+        max_length=100,
+        choices=BRAND_CHOICES,
+        unique=True
+    )
 
 
     def __str__(self):
@@ -270,7 +274,8 @@ class CarPost(models.Model):
         choices=TRANSMISSION_CHOICES,
     )
     #Todo chage to drive train
-    chassis = models.CharField(
+    drive_train = models.CharField(
+
         max_length=100,
         choices=DRIVE_TRAIN_CHOICES,
     )  # You need to define max_length
@@ -301,21 +306,17 @@ class CarPost(models.Model):
     )
     car_feature = models.ManyToManyField(
         'CarFeatures',
-
-        # blank=True,
-        # null=True,
-
     )
 
-    # created_at = models.DateTimeField(
-    #     auto_now_add=True
-    # )
-    # updated_at = models.DateTimeField(
-    #     auto_now=True
-    # )
+    created_at = models.DateTimeField(
+        auto_now_add=True
+    )
+    updated_at = models.DateTimeField(
+        auto_now=True
+    )
 
     def __str__(self):
-        return f'{self.car_model} {self.year} {self.user.name}'
+        return f"{self.car_model.brand} {self.car_model.model} - {self.id}"
 
 
 class CarFeatures(models.Model):
@@ -390,5 +391,6 @@ class CarFeatures(models.Model):
         blank=True
     )
 
-    def __str__(self):
-        return f"Features for {self.carpost_set.car_brand} {self.carpost_set.car_model}{self.carpost_set.id}"
+    # def __str__(self):
+    #     return f"{self.interior_features.flatchoices} {self.exterior_features.flatchoices} {self.safety_features}"
+    #
