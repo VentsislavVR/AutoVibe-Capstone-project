@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Delete Car Post
+{% endblock %}
+
+{% block content %}
+    
+    <section class="hero">
+    <div class="text">
+    <h1>Delete Car Post</h1>
+    <form action="{% url 'delete_car_post' object.pk %}" method="post">
+        {% csrf_token %}
+        <p>Are you sure you want to delete this car post?</p>
+        <input type="submit" value="Delete">
+    </form>
+        </div>
+    </section>
+{% endblock %}

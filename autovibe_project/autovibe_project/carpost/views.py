@@ -137,4 +137,7 @@ class UpdateCarView(views.UpdateView):
 
 
 class DeleteCarView(views.DeleteView):
-    pass
+    template_name = 'cars/delete_carpost.html'
+    model = CarPost
+    success_url = reverse_lazy('list_car_post')
+

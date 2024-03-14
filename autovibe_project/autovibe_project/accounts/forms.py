@@ -1,5 +1,6 @@
 from django.contrib.auth import forms as auth_forms, get_user_model
 from django import forms
+from django.utils.translation import gettext_lazy as _
 from .models import Profile
 
 UserModel = get_user_model()
@@ -15,6 +16,14 @@ class AutoVibeUserCreationForm(auth_forms.UserCreationForm):
         self.fields['password2'].widget.attrs['placeholder'] = 'Confirm Paassword'
         self.fields['password1'].help_text = None
         self.fields['password2'].help_text = None
+
+    def clean(self):
+        cleaned_data = super().clean()
+        password1 = cleaned_data.get("password1")
+        password2 = cleaned_data.get("password2")
+        if password1 and password2 and password1 != password2:
+            raise forms.ValidationError(_("The two password fields didn't match."))
+        return cleaned_data
     class Meta(auth_forms.UserCreationForm.Meta):
         model = UserModel
         fields = ('email', 'password1', 'password2')
