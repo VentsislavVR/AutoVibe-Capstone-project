@@ -12,6 +12,7 @@ urlpatterns = [
     path('accounts/',include('autovibe_project.accounts.urls')),
     path('common/',include('autovibe_project.common.urls')),
     path('carpost/',include('autovibe_project.carpost.urls')),
+    path('articles/',include('autovibe_project.articles.urls')),
 
 ]
 if settings.DEBUG:

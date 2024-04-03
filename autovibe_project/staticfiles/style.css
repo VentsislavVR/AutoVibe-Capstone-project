@@ -22,8 +22,15 @@ header nav{
     height: 80px;
 }
 header nav .logo{
-    width: 150px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    mix-blend-mode: multiply;
 }
+
 header nav .menu{
     display: flex;
     align-items: center;

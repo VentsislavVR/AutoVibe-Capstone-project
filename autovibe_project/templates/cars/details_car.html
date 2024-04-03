@@ -95,10 +95,13 @@
             </div>
         </div>
         <div style="clear: both;"></div>
+        {% if user.is_authenticated and user == object.user %}
         <div class="form-row">
             <a class="btn" href="{% url 'update_car_post' object.pk %}">Edit</a>
             <a class="btn" href="{% url 'delete_car_post' object.pk %}">Delete</a>
         </div>
+        {% endif %}
+    {{ owner_info }}
     </div>
 </section>
 {% endblock %}

@@ -1,6 +1,8 @@
 from django.apps import AppConfig
 
 
-class BlogConfig(AppConfig):
+class ArticlesConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
-    name = 'autovibe_project.blog'
+    name = 'autovibe_project.articles'
+
+

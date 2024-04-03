@@ -1,84 +1,22 @@
-{#{% extends 'base.html' %}#}
-{#{% block title %}#}
-{#    Update {{ object.car_model }}#}
-{#{% endblock %}#}
-{#{% block content %}#}
-{#    <section class="hero">#}
-{#        <div class="text">#}
-{#            <form action="{% url 'update_car_post' object.pk %}" method="POST" enctype="multipart/form-data">#}
-{#                #}
-{#                {% csrf_token %}#}
-{#                {{ form.as_p }}#}
-{#                 <ul style="list-style: none; padding: 0;">#}
-{#                    {% for category, items in features.items %}#}
-{#                    <li>#}
-{#                        <strong class="red-text">{{ category }}:</strong>#}
-{#                        <ul style="list-style: none; padding: 0;">#}
-{#                            {% for item in items %}#}
-{#                            <li class="white-text"><span>{{ item }}</span></li>#}
-{#                            {% endfor %}#}
-{#                        </ul>#}
-{#                    </li>#}
-{#                    {% endfor %}#}
-{#                </ul>#}
-{#                <div class="form-row">#}
-{#                    <button type="submit" class="btn sell-btn">Save Changes</button>#}
-{#                    <a class="btn" href="{% url 'delete_car_post' object.pk %}">Delete Post</a>#}
-{#                </div>#}
-{#            </form>#}
-{##}
-{#        </div>#}
-{#    </section>#}
-{##}
-{#{% endblock %}#}
-{##}
-{##}
-{#{% extends 'base.html' %}#}
-{#{% block title %}#}
-{#    Update {{ object.car_model }}#}
-{#{% endblock %}#}
-{#{% block content %}#}
-{#    <section class="hero">#}
-{#        <div class="text">#}
-{#            <form action="{% url 'update_car_post' object.pk %}" method="POST" enctype="multipart/form-data">#}
-{#                #}
-{#                {% csrf_token %}#}
-{#                {{ form.as_p }}#}
-{#                #}
-{#                <h3 style="color: red;">Features:</h3>#}
-{#                <ul style="list-style: none; padding: 0;">#}
-{#                    {% for category, items in features.items %}#}
-{#                    <li>#}
-{#                        <strong class="red-text">{{ category.capitalize }}:</strong>#}
-{#                        <ul style="list-style: none; padding: 0;">#}
-{#                            {% for item in items %}#}
-{#                            <li class="white-text"><span>{{ item }}</span></li>#}
-{#                            {% endfor %}#}
-{#                        </ul>#}
-{#                    </li>#}
-{#                    {% endfor %}#}
-{#                </ul>#}
-{#                <div class="form-row">#}
-{#                    <button type="submit" class="btn sell-btn">Save Changes</button>#}
-{#                    <a class="btn" href="{% url 'delete_car_post' object.pk %}">Delete Post</a>#}
-{#                </div>#}
-{#            </form>#}
-{##}
-{#        </div>#}
-{#    </section>#}
-{##}
-{#{% endblock %}#}
-{##}
+
 {% extends 'base.html' %}
 {% block title %}
     Update {{ object.car_model }}
 {% endblock %}
 {% block content %}
-    
+
     <section class="hero">
         <div style="margin-top: 200px" class="text">
-            <form action="{% url 'update_car_post' object.pk %}" method="POST" enctype="multipart/form-data">
-                {% csrf_token %}
+            <form action="{% url 'update_car_post' object.pk %}" method="post" enctype="multipart/form-data">
+                {% csrf_token %}{% if errors %}
+                    <ul>
+                        {% for field, error_list in errors.items %}
+                            {% for error in error_list %}
+                                <li>{{ field }}: {{ error }}</li>
+                            {% endfor %}
+                        {% endfor %}
+                    </ul>
+                {% endif %}
 
                 <div class="form-row">
                     <label for="id_brand">Brand:</label>
@@ -89,6 +27,12 @@
                     <label for="id_model">Model:</label>
                     {{ form.model }}
                 </div>
+            
+                <div class="form-row">
+                    <label for="id_year">Municipality</label>
+                    {{ form.municipality }}
+                </div>
+            
 
                 <div class="form-row">
                     <label for="id_year">Year:</label>
@@ -119,6 +63,10 @@
                     <label for="id_chassis">Chassis:</label>
                     {{ form.chassis }}
                 </div>
+                <div class="form-row">
+                        <label for="id_year">Drive train:</label>
+                    {{ form.drive_train }}
+                </div>
 
                 <div class="form-row">
                     <label for="id_price">Price:</label>
@@ -139,8 +87,8 @@
                     <label for="id_description">Description:</label>
                     {{ form.description }}
                 </div>
-                
-               
+
+
                 <div class="form-row">
                     <label for="id_image">Image:</label>
                     {{ form.image }}
@@ -169,7 +117,7 @@
 
                 <div class="form-row">
                     <button type="submit" class="btn sell-btn">Save Changes</button>
-                    <a class="btn" href="{% url 'delete_car_post' object.pk %}">Delete Post</a>
+                               
                 </div>
             </form>
         </div>

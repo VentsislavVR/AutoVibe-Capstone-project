@@ -254,8 +254,9 @@ class CarPost(models.Model):
 
     year = models.PositiveIntegerField(
         validators=[MinValueValidator(MIN_YEAR_VALUE),
-                    MaxValueValidator(datetime.now().year + 1)],
+                    MaxValueValidator(datetime.now().year + 1)]
     )
+
     color = models.CharField(
         max_length=MAX_COLOR_LENGTH,
         choices=COLOR_CHOICES,
@@ -372,17 +373,17 @@ class CarFeatures(models.Model):
     ]
 
     interior_features = MultiSelectField(
-        max_length=100,
+        max_length=1000,
         choices=INTERIOR_FEATURES_CHOICES,
         blank=True,
     )
     exterior_features = MultiSelectField(
-        max_length=100,
+        max_length=1000,
         choices=EXTERIOR_FEATURES_CHOICES,
         blank=True
     )
     safety_features = MultiSelectField(
-        max_length=100,
+        max_length=1000,
         choices=SAFETY_FEATURES_CHOICES,
         blank=True
     )

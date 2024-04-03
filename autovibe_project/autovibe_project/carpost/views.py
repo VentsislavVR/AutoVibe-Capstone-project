@@ -103,6 +103,7 @@ class DetailsCarView(views.DetailView):
         car_features = car_post.car_feature.all()
         brand = car_post.car_model.brand
         model = car_post.car_model.model
+        owner_info = car_post.user
 
         features = {
             'interior': [],
@@ -120,6 +121,8 @@ class DetailsCarView(views.DetailView):
         context['brand'] = brand
         context['model'] = model
         context['features'] = features
+        #tODO CONNECT OWNER AND BUYER
+        context['owner_info'] = owner_info
 
         return context
 
@@ -134,7 +137,13 @@ class UpdateCarView(views.UpdateView):
     def get_success_url(self):
         return reverse_lazy('details_car_post', kwargs={'pk': self.object.pk})
 
-
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        form = context['form']
+        # Check if the form has validation errors
+        if form.errors:
+            context['errors'] = form.errors
+        return context
 
 class DeleteCarView(views.DeleteView):
     template_name = 'cars/delete_carpost.html'
