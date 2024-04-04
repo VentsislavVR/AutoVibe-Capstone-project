@@ -47,7 +47,7 @@ INSTALLED_APPS = [
     'autovibe_project.common',
     'autovibe_project.home',
     'autovibe_project.articles',
-    'autovibe_project.shop',
+    'autovibe_project.merchshop',
     'autovibe_project.carpost',
 
 ]
@@ -150,7 +150,10 @@ LOGIN_REDIRECT_URL = reverse_lazy("index")
 LOGIN_URL = reverse_lazy("login_user")
 LOGOUT_REDIRECT_URL = reverse_lazy("index")
 
+
+
 #
+
 # LOGGING = {
 #     'version': 1,
 #     'filters': {

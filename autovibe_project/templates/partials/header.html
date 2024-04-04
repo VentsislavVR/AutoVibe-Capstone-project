@@ -19,7 +19,8 @@
                 {% if perms.articles.add_article %}
                  <a href="{% url 'article_create' %}">Create Article</a>
              {% endif %}
-             <a href="#"><i class="fa-solid fa-cart-shopping"></i></a>
+             <a href="{% url 'cart' %}" class="button is-dark">Cart{% if cart %}({{ cart|length }}){% endif %}</a>
+             <a href="{% url 'merch_shop_list' %}">Merch shop<i class="fa-solid fa-cart-shopping"></i></a>
             {% endif %}
             <hr>
             <h1 style="color: white">{{ request.user }}</h1>

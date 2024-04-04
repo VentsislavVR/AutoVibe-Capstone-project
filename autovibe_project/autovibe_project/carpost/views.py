@@ -24,7 +24,6 @@ class CreateCarPostWizardView(auth_mixins.LoginRequiredMixin, SessionWizardView)
         CarBrandModelForm,
         CarPostForm,
         CarFeaturesForm,
-
     ]
 
     # def get_success_url(self):
