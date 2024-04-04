@@ -10,6 +10,9 @@ from django.contrib.auth import mixins as auth_mixins
 
 from autovibe_project.carpost.forms import CarBrandModelForm, CarPostForm, CarFeaturesForm, CarUpdateForm
 from autovibe_project.carpost.models import CarModel, CarPost, CarFeatures
+from django.contrib.auth import mixins as auth_mixins
+
+from autovibe_project.core.view_mixins import OwnerRequiredMixin
 
 
 # Todo maybe add xondition for 3rd form
@@ -89,7 +92,7 @@ class CarPostListView(views.ListView):
         return queryset
 
 
-class DetailsCarView(views.DetailView):
+class DetailsCarView(auth_mixins.LoginRequiredMixin, views.DetailView):
     template_name = 'cars/details_car.html'
     model = CarPost
 
@@ -103,7 +106,7 @@ class DetailsCarView(views.DetailView):
         car_features = car_post.car_feature.all()
         brand = car_post.car_model.brand
         model = car_post.car_model.model
-        owner_info = car_post.user
+        owner_profile = car_post.user.profile
 
         features = {
             'interior': [],
@@ -121,13 +124,13 @@ class DetailsCarView(views.DetailView):
         context['brand'] = brand
         context['model'] = model
         context['features'] = features
-        #tODO CONNECT OWNER AND BUYER
-        context['owner_info'] = owner_info
-
+        # tODO CONNECT OWNER AND BUYER
+        context['owner_profile'] = owner_profile
+        #TODO when login is needed after login redirect to details page
         return context
 
 
-class UpdateCarView(views.UpdateView):
+class UpdateCarView(auth_mixins.LoginRequiredMixin, OwnerRequiredMixin, views.UpdateView):
     template_name = 'cars/update_car_post.html'
     queryset = (CarPost.objects.all()
                 .prefetch_related('car_feature', 'car_model'))
@@ -145,8 +148,8 @@ class UpdateCarView(views.UpdateView):
             context['errors'] = form.errors
         return context
 
-class DeleteCarView(views.DeleteView):
+
+class DeleteCarView(auth_mixins.LoginRequiredMixin, OwnerRequiredMixin, views.DeleteView):
     template_name = 'cars/delete_carpost.html'
     model = CarPost
     success_url = reverse_lazy('list_car_post')
-

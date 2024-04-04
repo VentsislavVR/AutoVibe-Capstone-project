@@ -11,8 +11,8 @@ class CarBrandModelForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        brand = self.data.get('0-brand')  # Assuming '0-brand' is the key for the brand data in kwargs
-        model = self.data.get('0-model')  # Assuming '0-model' is the key for the model data in kwargs
+        brand = self.data.get('0-brand')
+        model = self.data.get('0-model')
 
         self.fields['brand'].widget.attrs.update({'onchange': 'this.form.submit();'})
 
@@ -45,14 +45,14 @@ class CarPostForm(forms.ModelForm):
         model = kwargs.pop('model', None)
         super().__init__(*args, **kwargs)
         if brand:
-            # Set initial value for brand field
+
             self.fields['brand'].initial = brand
-            # Disable brand field to prevent changes
+
             self.fields['brand'].widget.attrs['disabled'] = True
         if model:
-            # Set initial value for model field
+
             self.fields['model'].initial = model
-            # Disable model field to prevent changes
+
             self.fields['model'].widget.attrs['disabled'] = True
 class CarFeaturesForm(forms.ModelForm):
     class Meta:

@@ -75,6 +75,7 @@
                     <li class="red-text"><strong>VIN:</strong> <span class="white-text">{{ object.vin }}</span></li>
                     <li class="red-text"><strong>Description:</strong> <span class="white-text">{{ object.description }}</span></li>
                 </ul>
+             <a style="color: white" class="btn" href="{% url 'profile_details' pk=object.user.pk %}">Contact owner</a>
                 <h3 style="color: red;">Features:</h3>
                 <ul style="list-style: none; padding: 0;">
                     {% for category, items in features.items %}
@@ -101,7 +102,7 @@
             <a class="btn" href="{% url 'delete_car_post' object.pk %}">Delete</a>
         </div>
         {% endif %}
-    {{ owner_info }}
+       
     </div>
 </section>
 {% endblock %}

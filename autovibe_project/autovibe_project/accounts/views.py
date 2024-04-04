@@ -52,6 +52,7 @@ class ProfileDetailsView(auth_mixins.LoginRequiredMixin,views.DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['car_posts_count'] = self.object.user.carpost_set.count()
+        context['car_posts'] = self.object.user.carpost_set.all()
         return context
 
 class ProfileUpdateView(views.UpdateView):

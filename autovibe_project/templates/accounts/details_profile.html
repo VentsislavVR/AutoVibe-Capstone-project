@@ -26,19 +26,34 @@
                     class="white-text">{{ object.telephone_number|default:"" }}</span></h4>
             <h4><span class="red-text">Member Since:</span> <span
                     class="white-text">{{ object.user.date_joined|date:"SHORT_DATE_FORMAT" }}</span></h4>
-            
-        
-            <h4><span class="red-text">Number of car posts:</span> <span class="white-text">{{ car_posts_count }}</span></h4>
 
+
+            <h4><span class="red-text">Number of car posts:</span> <span class="white-text">{{ car_posts_count }}</span>
+            </h4>
+            {% for car_post in car_posts %}
+                <div class="form-row">
+                    <p>{{ car_post.car_model.brand }} {{ car_post.car_model.model }}</p>
+                    <hr>
+                    <img src="{{ car_post.image.url }}" alt="{{ car_post.car_model.brand }}">
+                    <p>{{ car_post.description }}</p>
+                    <a href="{% url 'details_car_post' car_post.pk %}">View Details</a>
+                </div>
+            {% empty %}
+                <p>No car posts found.</p>
+                <a href="{% url 'create_car_post' %}">Create a new car post</a>
+            {% endfor %}
             <hr>
             <!-- Buttons for Editing and Deleting the Profile -->
-            <div class="form-row">
-                <a class="btn sell-btn" href="{% url 'profile_update' object.pk %}">Edit Profile</a>
-                <a class="btn" href="{% url 'profile_delete' object.pk %}">Delete Profile</a>
-            </div>
-        </div>
+            {% if object.user == request.user %}
+                <div class="form-row">
+                    <a class="btn sell-btn" href="{% url 'profile_update' object.pk %}">Edit Profile</a>
+                    <a class="btn" href="{% url 'profile_delete' object.pk %}">Delete Profile</a>
+                </div>
+
+                </div>
+            {% endif %}
     </section>
 {% endblock %}
-/*Todo add more data, car listing 
+/*Todo add more data, car listing
 Maybe wish list
 */
