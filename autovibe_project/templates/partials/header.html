@@ -1,35 +1,37 @@
 {% load static %}
 <header>
     <nav>
-        <a href="{% url 'index' %}">
-            <img  src="{% static 'img/Black and Green Modern Automotive Logo.png' %}" class="logo" alt="">
-        </a>
-        <div class="menu">
-            <a href="{% url 'index' %}">Home</a>
-            <a href="{% url 'about_page' %}">About</a>
-            <a href="{% url 'articles_list' %}">Articles</a>
-{#            <a href="#">Contact</a>#}
-            {% if not request.user.is_authenticated %}
-            <a href="{% url 'login_user' %}">Login</a>
-            <a href="{% url 'register_user' %}">Register</a>
-            <a href="#"><i class="fa-solid fa-magnifying-glass"></i></a>
-            {% else %}
-             <a href="{% url 'profile_details' pk=request.user.pk %}">Profile</a>
-             <a href="{% url 'logout_user' %}">Logout</a>
-                {% if perms.articles.add_article %}
-                 <a href="{% url 'article_create' %}">Create Article</a>
-             {% endif %}
-             <a href="{% url 'cart' %}" class="button is-dark">Cart{% if cart %}({{ cart|length }}){% endif %}</a>
-             <a href="{% url 'merch_shop_list' %}">Merch shop<i class="fa-solid fa-cart-shopping"></i></a>
-            {% endif %}
-            <hr>
-            <h1 style="color: white">{{ request.user }}</h1>
+        <div class="wrapper">
+            <div class="menu">
+                <a class="v-logo" href="{% url 'index' %}">
+                    <img src="{% static 'img/Black and Green Modern Automotive Logo.png' %}" class="logo" alt="">
+                </a>
+                <a href="{% url 'index' %}">Home</a>
+                <a href="{% url 'about_page' %}">About</a>
+                <a href="{% url 'articles_list' %}">Articles</a>
+                {#            <a href="#">Contact</a>#}
+                {% if not request.user.is_authenticated %}
+                    <a href="{% url 'login_user' %}">Login</a>
+                    <a href="{% url 'register_user' %}">Register</a>
+                    <a href="#"><i class="fa-solid fa-magnifying-glass"></i></a>
+                {% else %}
+                    <a href="{% url 'profile_details' pk=request.user.pk %}">Profile</a>
+                    <a href="{% url 'logout_user' %}">Logout</a>
+                    {% if perms.articles.add_article %}
+                        <a href="{% url 'article_create' %}">Create Article</a>
+                    {% endif %}
+                    <a href="{% url 'cart' %}" class="button is-dark">Cart{% if cart %}({{ cart|length }}
+                        ){% endif %}</a>
+                    <a href="{% url 'merch_shop_list' %}">Merch shop<i class="fa-solid fa-cart-shopping"></i></a>
+                {% endif %}
+                <h1 class="v-user" style="color: white">{{ request.user }}</h1>
+            </div>
         </div>
 
-{#        <div class="social">#}
-{#            <a href="#"><i class="fa-brands fa-facebook-f"></i></a>#}
-{#            <a href="#"><i class="fa-brands fa-twitter"></i></a>#}
-{#            <a href="#"><i class="fa-brands fa-instagram"></i></a>#}
-{#        </div>#}
+        {#        <div class="social">#}
+        {#            <a href="#"><i class="fa-brands fa-facebook-f"></i></a>#}
+        {#            <a href="#"><i class="fa-brands fa-twitter"></i></a>#}
+        {#            <a href="#"><i class="fa-brands fa-instagram"></i></a>#}
+        {#        </div>#}
     </nav>
 </header>

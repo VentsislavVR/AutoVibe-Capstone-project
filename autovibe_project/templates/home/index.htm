@@ -5,25 +5,24 @@
 {% endblock %}
 
 {% block content %}
-    
-<div class="hero">
-    <div class="text">
-        <h4 style="color: white">Life is too short to drive boring cars.</h4>
-        <h1>Find Your <br> <span>Dream Ride</span></h1>
-        <p>Experience the thrill of driving a car that matches your passion and style.</p>
-{#        <a href="#" class="btn">Explore Now</a>#}
-       <div class="buttons-container">
-            <a href="{% url 'list_car_post' %}" class="btn explore-btn">Explore Listed Cars</a>
-{#            <span style="color: white" class="or">OR</span>#}
-           
-            <a  href="{% url 'create_car_post' %}" class="btn sell-btn">Sell Your Car</a>
-        </div>
-       
-        
-        
-    </div>
 
-</div>
+    <div class="hero">
+        <div class="text">
+            <div class="wrapper">
+                <h4 style="color: white">Life is too short to drive boring cars.</h4>
+                <h1>Find Your <br> <span>Dream Ride</span></h1>
+                <p>Experience the thrill of driving a car that matches your passion and style.</p>
+                {#        <a href="#" class="btn">Explore Now</a>#}
+                <div class="buttons-container">
+                    <a href="{% url 'list_car_post' %}" class="btn explore-btn">Explore Listed Cars</a>
+                    {#            <span style="color: white" class="or">OR</span>#}
+
+                    <a href="{% url 'create_car_post' %}" class="btn sell-btn">Sell Your Car</a>
+                </div>
+            </div>
+        </div>
+
+    </div>
 {% endblock %}
 
 {% block background_image %}

@@ -157,8 +157,14 @@ class CarModel(models.Model):
         'LAND ROVER':
             ['Range Rover', 'Range Rover Sport', 'Range Rover Evoque', 'Discovery', 'Discovery Sport',
                        'Defender', 'Freelander', 'Series I', ], }
-    brand = models.CharField(max_length=100)
-    model = models.CharField(max_length=100)
+    brand = models.CharField(
+        max_length=100,
+        default='Pick a brand',
+    )
+    model = models.CharField(
+        max_length=100,
+        default='Pick a model',
+    )
 
 
     def __str__(self):
