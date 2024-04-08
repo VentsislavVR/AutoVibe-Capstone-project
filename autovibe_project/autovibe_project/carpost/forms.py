@@ -39,6 +39,7 @@ class CarPostForm(forms.ModelForm):
     class Meta:
         model = CarPost
         fields = ['municipality', 'year', 'color', 'engine', 'horsepower', 'transmission', 'drive_train', 'price', 'mileage', 'vin', 'description', 'image']
+    description = forms.CharField(widget=forms.Textarea(attrs={'rows': 5, 'cols': 23}))
 
     def __init__(self, *args, **kwargs):
         brand = kwargs.pop('brand', None)
@@ -63,6 +64,8 @@ class CarFeaturesForm(forms.ModelForm):
             'exterior_features': forms.CheckboxSelectMultiple,
             'safety_features': forms.CheckboxSelectMultiple,
         }
+
+    other_features = forms.CharField(widget=forms.Textarea(attrs={'rows': 5, 'cols': 20}))
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
