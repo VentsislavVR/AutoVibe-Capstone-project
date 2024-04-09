@@ -150,7 +150,8 @@ LOGIN_REDIRECT_URL = reverse_lazy("index")
 LOGIN_URL = reverse_lazy("login_user")
 LOGOUT_REDIRECT_URL = reverse_lazy("index")
 
-
+MAILJET_API_KEY = '98bd81b4524da561658f9ef0ec5559df'
+MAILJET_SECRET_KEY = '9ddf36a93560cab7dbeba62d4df51bd7'
 
 #
 
