@@ -304,7 +304,7 @@ class CarPost(models.Model):
         max_length=500,
     )
     image = cloudinary_models.CloudinaryField(
-        "carposts",
+        "carpost",
         blank=True,
         null=True
     )

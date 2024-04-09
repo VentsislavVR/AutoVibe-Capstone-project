@@ -362,3 +362,12 @@ footer {
 .edit-form-1 .form-row{
     display: flex;
 }
+
+.v-explore{
+    flex-direction: row !important;
+}
+
+.v-explore-cars{
+    display: flex;
+    flex-direction: column;
+}

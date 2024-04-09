@@ -9,7 +9,7 @@ from autovibe_project.articles.models import Article
 class ArticlesListView(views.ListView):
     template_name = 'articles/list_articles.html'
     model = Article
-    paginate_by = 2
+    paginate_by = 6
 
 
 class ArticlesDetailView(auth_mixins.LoginRequiredMixin,views.DetailView):

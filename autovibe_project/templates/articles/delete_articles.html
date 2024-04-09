@@ -3,12 +3,14 @@
 {% block content %}
     <div class="hero">
         <div class="text">
-            <h4>Delete Article</h4>
-            <p>Are you sure you want to delete "{{ object.name }}"?</p>
-            <form method="post">
-                {% csrf_token %}
-                <button type="submit" class="btn btn-danger">Delete</button>
-            </form>
+            <div class="wrapper">
+                <h4>Delete Article</h4>
+                <p>Are you sure you want to delete "{{ object.name }}"?</p>
+                <form method="post" action="{% url 'article_delete' pk=object.pk slug=object.slug %}">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-danger">Delete</button>
+                </form>
+            </div>
         </div>
     </div>
 {% endblock %}

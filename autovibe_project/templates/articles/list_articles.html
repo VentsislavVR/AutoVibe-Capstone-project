@@ -6,7 +6,8 @@
 {% endblock %}
 
 {% block content %}
-<section class="hero">
+<section class="hero v-article-list">
+<div class="wrapper">
     <div class="text">
         <!-- Add search form if needed -->
     </div>
@@ -14,10 +15,10 @@
     <div class="article-list">
         {% for article in object_list %}
             <div class="article-card" style="border: 1px solid #ccc; padding: 10px; margin-bottom: 20px;">
-                <img src="{{ article.image.url }}" alt="{{ article.name }}" style="width: 100%; height: auto;">
+                <img src="{{ article.article_img.url }}" alt="{{ article.name }}">
                 <div>
                     <h3>{{ article.name }}</h3>
-                    <p>{{ article.content|truncatewords:50 }}</p>
+                    <p>{{ article.content|truncatewords:20 }}. . . . . . . . </p>
                     <a href="{% url 'article_details' pk=article.pk slug=article.slug %}" style="display: inline-block; padding: 5px 10px; background-color: #007bff; color: #fff; text-decoration: none;">Read More</a>
                 </div>
             </div>
@@ -44,5 +45,6 @@
             </span>
         {% endif %}
     </div>
+</div>
 </section>
 {% endblock %}

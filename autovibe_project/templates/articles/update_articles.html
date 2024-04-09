@@ -6,14 +6,16 @@
 {% endblock %}
 
 {% block content %}
-<section class="hero">
-    <div class="text">
-        <h4>Update Article</h4>
-        <form method="post" action="{% url 'article_update' pk=article.pk slug=article.slug %}">
-            {% csrf_token %}
-            {{ form.as_p }}
-            <button type="submit">Update</button>
-        </form>
-    </div>
-</section>
+    <section class="hero">
+        <div class="text">
+            <div class="wrapper">
+                <h4>Update Article</h4>
+                <form method="post" action="{% url 'article_update' pk=article.pk slug=article.slug %}">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <button type="submit">Update</button>
+                </form>
+            </div>
+        </div>
+    </section>
 {% endblock %}

@@ -1,58 +1,72 @@
 {% extends 'base.html' %}
 {% load static %}
- 
+
 
 {% block title %}
     Profile Details - Cars
 {% endblock %}
 
 {% block content %}
-    <section class="hero">
+    <section class="hero v-profile">
         <div class="text">
-            {% if object.user.profile.profile_picture %}
-                <img class="small-image" src="{{ object.profile_picture.url }}" alt="Profile Image">
-            {% else %}
-                <img class="small-image" src="{% static 'img/dummy_user.jpg' %}" alt="Profile Image">
-            {% endif %}
-            <hr>
-
-            <!-- Profile Info -->
-
-            <h4><span class="red-text">Name:</span> <span class="white-text">{{ object.user.profile.full_name }}</span>
-            </h4>
-            <h4><span class="red-text">Email:</span> <span class="white-text">{{ object.user.email }}</span></h4>
-            <h4><span class="red-text">Date of Birth:</span> <span
-                    class="white-text">{{ object.date_of_birth|default:"" }}</span></h4>
-            <h4><span class="red-text">Telephone Number:</span> <span
-                    class="white-text">{{ object.telephone_number|default:"" }}</span></h4>
-            <h4><span class="red-text">Member Since:</span> <span
-                    class="white-text">{{ object.user.date_joined|date:"SHORT_DATE_FORMAT" }}</span></h4>
+            <div class="wrapper">
+                <div class="v-profile-info">
+                    <div class="v-profile-details">
+                        {% if object.user.profile.profile_picture %}
+                            <img class="small-image" src="{{ object.profile_picture.url }}" alt="Profile Image">
+                        {% else %}
+                            <img class="small-image" src="{% static 'img/dummy_user.jpg' %}" alt="Profile Image">
+                        {% endif %}
 
 
-            <h4><span class="red-text">Number of car posts:</span> <span class="white-text">{{ car_posts_count }}</span>
-            </h4>
-            {% for car_post in car_posts %}
-                <div class="form-row">
-                    <p>{{ car_post.car_model.brand }} {{ car_post.car_model.model }}</p>
-                    <hr>
-                    <img src="{{ car_post.image.url }}" alt="{{ car_post.car_model.brand }}">
-                    <p>{{ car_post.description }}</p>
-                    <a href="{% url 'details_car_post' car_post.pk %}">View Details</a>
+                        <!-- Profile Info -->
+
+                        <h4><span class="red-text">Name:</span> <span
+                                class="white-text">{{ object.user.profile.full_name }}</span>
+                        </h4>
+                        <h4><span class="red-text">Email:</span> <span class="white-text">{{ object.user.email }}</span>
+                        </h4>
+                        <h4><span class="red-text">Date of Birth:</span> <span
+                                class="white-text">{{ object.date_of_birth|default:"" }}</span></h4>
+                        <h4><span class="red-text">Telephone Number:</span> <span
+                                class="white-text">{{ object.telephone_number|default:"" }}</span></h4>
+                        <h4><span class="red-text">Member Since:</span> <span
+                                class="white-text">{{ object.user.date_joined|date:"SHORT_DATE_FORMAT" }}</span></h4>
+
+
+                        <h4><span class="red-text">Number of car posts:</span> <span
+                                class="white-text">{{ car_posts_count }}</span>
+                        </h4>
+                    </div>
+                    <div class="v-profile-cars">
+                        {% for car_post in car_posts %}
+                            <div class="form-row">
+                                <p>{{ car_post.car_model.brand }} {{ car_post.car_model.model }}</p>
+                                
+                                <img src="{{ car_post.image.url }}" alt="{{ car_post.car_model.brand }}">
+                                <p>{{ car_post.description }}</p>
+                                <a href="{% url 'details_car_post' car_post.pk %}">View Details</a>
+                            </div>
+                        {% empty %}
+                            <p>No car posts found.</p>
+                            <a href="{% url 'create_car_post' %}">Create a new car post</a>
+                        {% endfor %}
+
+
+                    </div>
+                    <!-- Buttons for Editing and Deleting the Profile -->
+                    {% if object.user == request.user %}
+                        <div class="form-row">
+                            <a class="btn sell-btn" href="{% url 'profile_update' object.pk %}">Edit Profile</a>
+                            <a class="btn" href="{% url 'profile_delete' object.pk %}">Delete Profile</a>
+                        </div>
+
+
+                    {% endif %}
                 </div>
-            {% empty %}
-                <p>No car posts found.</p>
-                <a href="{% url 'create_car_post' %}">Create a new car post</a>
-            {% endfor %}
-            <hr>
-            <!-- Buttons for Editing and Deleting the Profile -->
-            {% if object.user == request.user %}
-                <div class="form-row">
-                    <a class="btn sell-btn" href="{% url 'profile_update' object.pk %}">Edit Profile</a>
-                    <a class="btn" href="{% url 'profile_delete' object.pk %}">Delete Profile</a>
-                </div>
+            </div>
+        </div>
 
-                </div>
-            {% endif %}
     </section>
 {% endblock %}
 /*Todo add more data, car listing

@@ -11,6 +11,7 @@
             <form action="{% url 'profile_update' pk=object.pk %}" method="post" enctype="multipart/form-data">
                 {% csrf_token %}
                 {{ form.as_p }}
+{#                #Todo dix#}
                 <div class="form-row">
                     <button type="submit" class="btn sell-btn">Save Changes</button>
                     <a class="btn" href="{% url 'profile_delete' object.pk %}">Delete Profile</a>

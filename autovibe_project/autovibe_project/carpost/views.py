@@ -68,6 +68,7 @@ class CarPostListView(views.ListView):
         .prefetch_related('car_feature', 'car_model')
 
     template_name = 'cars/list_car.html'
+    paginate_by = 4
 
     # paginate_by = 10
 

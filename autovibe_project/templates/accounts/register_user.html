@@ -18,36 +18,38 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="hero">
-    <div class="text">
-        <h4>Register</h4>
-        <form method="post" action="{% url 'register_user' %}">
-            {% csrf_token %}
-            <div class="form-row">
-                <div class="form-group">
-                    {{ form.email.label_tag }}
-                    {{ form.email }}
-                    {{ form.email.errors }}
-                </div>
+    <div class="hero">
+        <div class="text">
+            <div class="wrapper">
+                <h4>Register</h4>
+                <form method="post" action="{% url 'register_user' %}">
+                    {% csrf_token %}
+                    <div class="form-row">
+                        <div class="form-group">
+                            {{ form.email.label_tag }}
+                            {{ form.email }}
+                            {{ form.email.errors }}
+                        </div>
+                    </div>
+                    <div class="form-row password-row">
+                        <div class="form-group">
+                            {{ form.password1.label_tag }}
+                            {{ form.password1 }}
+                            {{ form.password1.errors }}
+                        </div>
+                    </div>
+                    <div class="form-row password-row">
+                        <div class="form-group">
+                            {{ form.password2.label_tag }}
+                            {{ form.password2 }}
+                            {{ form.password2.errors }}
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <button type="submit" class="btn">Register</button>
+                    </div>
+                </form>
             </div>
-            <div class="form-row password-row">
-                <div class="form-group">
-                    {{ form.password1.label_tag }}
-                    {{ form.password1 }}
-                    {{ form.password1.errors }}
-                </div>
-            </div>
-            <div class="form-row password-row" >
-                <div class="form-group">
-                    {{ form.password2.label_tag }}
-                    {{ form.password2 }}
-                    {{ form.password2.errors }}
-                </div>
-            </div>
-            <div class="form-row">
-                <button type="submit" class="btn">Register</button>
-            </div>
-        </form>
+        </div>
     </div>
-</div>
 {% endblock %}

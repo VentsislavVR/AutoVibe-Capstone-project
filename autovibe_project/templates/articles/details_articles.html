@@ -2,17 +2,23 @@
 
 {% block content %}
     <div class="hero">
-        <div class="text">
-            <div class="article-details">
-                <h4>{{ object.name }}</h4>
-                <p>{{ object.content }}</p>
-                
+        <div class="text single-article">
+            <div class="wrapper">
+                <div class="article-details">
+                    <h4>{{ object.name }}</h4>
+                    <div class="v-single-article">
+                        <img src="{{ object.article_img.url }}" alt="Article Image">
+                        <p>{{ object.content }}</p>
+                    </div>
+                </div>
                 {% if perms.articles.change_article %}
-                    <a href="{% url 'article_update' pk=object.pk slug=object.slug %}" class="btn btn-primary">Edit</a>
+                    <a href="{% url 'article_update' pk=object.pk slug=object.slug %}"
+                       class="btn btn-primary">Edit</a>
                 {% endif %}
-                
+
                 {% if perms.articles.delete_article %}
-                    <form action="{% url 'article_delete' pk=object.pk slug=object.slug %}" method="post" style="display: inline;">
+                    <form action="{% url 'article_delete' pk=object.pk slug=object.slug %}" method="post"
+                          style="display: inline;">
                         {% csrf_token %}
                         <button type="submit" class="btn btn-danger">Delete</button>
                     </form>

@@ -7,25 +7,56 @@
 {% endblock %}
 
 {% block content %}
-<section class="hero">
-    <div class="text">
-        <form action="{% url 'list_car_post' %}" method="GET">
-            <input type="text" name="q" placeholder="Find your dream car..."
-                   value="{{ query }}"> 
-            <button type="submit">Search</button>
-        </form>
-    </div>
-    {% for car in object_list %}
-        <div class="cards">
-<img class="card-img-top" src="{{ car.image }}" alt="{{ car.car_model }}">
-            <div class="card-body">
-                <h5 class="card-title">{{ car.car_model.brand }}-{{ car.car_model.model }}</h5>
-                <p>{{ car.car_model.model }}</p>
-                <p>{{ car.year }}</p>
-                <p>{{ car.price }}</p>
-                <a href="{% url 'details_car_post' pk=car.pk %}" class="btn btn-primary">Details</a>
+
+    <section class="hero v-explore">
+        <div class="v-container" >
+            <div class="wrapper" >
+                <div class="text">
+                    <form action="{% url 'list_car_post' %}" method="GET">
+                        <input type="text" name="q" placeholder="Find your dream car..."
+                               value="{{ query }}">
+                        <button type="submit">Search</button>
+                    </form>
+                </div>
+                <div class="v-explore-cars">
+                    {% for car in object_list %}
+                        <div class="cards">
+                            <div class="img-container">
+                                <img class="card-img-top" src="{{ car.image.url }}" alt="{{ car.car_model }}">
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title">{{ car.car_model.brand }}-{{ car.car_model.model }}</h5>
+                                <p>{{ car.car_model.model }}</p>
+                                <p>{{ car.year }}</p>
+                                <p>{{ car.price }}</p>
+                                <a href="{% url 'details_car_post' pk=car.pk %}" class="btn btn-primary">Details</a>
+                            </div>
+
+                        </div>
+                    {% endfor %}
+                </div>
+                <div class="pagination">
+                    {% if is_paginated %}
+                        <span class="step-links">
+                {% if page_obj.has_previous %}
+                    <a href="?page=1">&laquo; first</a>
+                    <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+                {% endif %}
+
+                            <span class="current">
+                    Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+                </span>
+
+                            {% if page_obj.has_next %}
+                                <a href="?page={{ page_obj.next_page_number }}">next</a>
+                                <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+                            {% endif %}
+            </span>
+                    {% endif %}
+                </div>
             </div>
-    </div>
-        {% endfor %}
-</section>
+        </div>
+    </section>
+
 {% endblock %}
+
