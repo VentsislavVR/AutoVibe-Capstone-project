@@ -11,6 +11,8 @@ class Article(models.Model):
     slug = models.SlugField(
         editable=False,
         unique=True,
+        null=False,
+        blank=True
     )
     name = models.CharField(
         max_length=MAX_NAME_LENGTH
@@ -32,8 +34,14 @@ class Article(models.Model):
             ("can_delete_article", "Can delete article"),
         ]
 
+
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
         if not self.slug:
             self.slug = slugify(f"{self.name}-{self.id}")
         return super().save(*args, **kwargs)
+
+    def __str__(self):
+        return self.name
+
+

@@ -35,6 +35,7 @@ class LogoutUserView(auth_views.LogoutView):
     template_name = "accounts/logout_user.html"
     http_method_names = ["get", "post"]
 
+
 # def logout_user(request):
 #
 #     logout(request)
