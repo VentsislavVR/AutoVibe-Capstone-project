@@ -8,6 +8,7 @@ from django.db import models
 # Create your models here.
 UserModel = get_user_model()
 from multiselectfield import MultiSelectField as MSField
+from cloudinary import models as cloudinary_models
 class MultiSelectField(MSField):
     """
     Custom Implementation of MultiSelectField to achieve Django 5.0 compatibility
@@ -302,7 +303,11 @@ class CarPost(models.Model):
     description = models.TextField(
         max_length=500,
     )
-    image = models.ImageField(upload_to='car_images/')
+    image = cloudinary_models.CloudinaryField(
+        "carposts",
+        blank=True,
+        null=True
+    )
 
     user = models.ForeignKey(UserModel, on_delete=models.CASCADE)
 

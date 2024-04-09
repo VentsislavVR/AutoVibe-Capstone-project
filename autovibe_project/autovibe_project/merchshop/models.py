@@ -5,6 +5,7 @@ from django.db import models
 from django.template.defaultfilters import slugify
 from io import BytesIO
 from PIL import Image
+from cloudinary import models as cloudinary_models
 UserModel = get_user_model()
 # Create your models here.
 class TitleSlugMixin(models.Model):
@@ -68,13 +69,13 @@ class Product(TitleSlugMixin):
     date_added = models.DateTimeField(
         auto_now_add=True
     )
-    image = models.ImageField(
-        upload_to='mediafiles/merch_items/',
+    image = cloudinary_models.CloudinaryField(
+        'merch_items',
         blank=True,
         null=True
     )
-    thumbnail = models.ImageField(
-        upload_to='mediafiles/merch_items/',
+    thumbnail = cloudinary_models.CloudinaryField(
+        'merch_items',
         blank=True,
         null=True
     )

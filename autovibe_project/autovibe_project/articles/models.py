@@ -1,6 +1,7 @@
 from django.contrib.auth import get_user_model
 from django.db import models
 from django.utils.text import slugify
+from cloudinary import models as cloudinary_models
 
 UserModel = get_user_model()
 class Article(models.Model):
@@ -17,7 +18,12 @@ class Article(models.Model):
     name = models.CharField(
         max_length=MAX_NAME_LENGTH
     )
-    article_img = models.ImageField(upload_to="articles")
+    article_img = cloudinary_models.CloudinaryField(
+        "articles",
+        blank=True,
+        null=True
+    )
+
     content = models.TextField(
         max_length=MAX_CONTENT_LENGTH
     )

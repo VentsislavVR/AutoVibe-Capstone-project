@@ -1,3 +1,4 @@
+from cloudinary import models as cloudinary_models
 from django.db import models
 from django.contrib.auth import models as auth_models
 from django.utils import timezone
@@ -55,8 +56,7 @@ class Profile(models.Model):
         null=True,
     )
 
-    profile_picture = models.ImageField(
-        upload_to="profile_pictures/",
+    profile_picture = cloudinary_models.CloudinaryField(
         blank=True,
         null=True,
     )
@@ -65,7 +65,6 @@ class Profile(models.Model):
         blank=True,
         null=True,
     )
-
 
     user = models.OneToOneField(
         AutoVibeUser,
