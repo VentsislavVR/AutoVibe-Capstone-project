@@ -15,7 +15,6 @@ SECRET_KEY = os.environ.get("SECRET_KEY", 1)
 
 
 DEBUG = os.environ.get("DEBUG", "1") == "1"
-# Todo fix 404
 
 ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS", "").split(" ")
 # ALLOWED_HOSTS = ['*']

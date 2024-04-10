@@ -6,6 +6,17 @@ class Error404View(TemplateView):
     def get(self, request, *args, **kwargs):
         context = self.get_context_data(**kwargs)
         return self.render_to_response(context, status=404)
+class Error403View(TemplateView):
+    template_name = '403.html'
+    def get(self, request, *args, **kwargs):
+        context = self.get_context_data(**kwargs)
+        return self.render_to_response(context, status=403)
+class Error500View(TemplateView):
+    template_name = '500.html'
+
+    def get(self, request, *args, **kwargs):
+        context = self.get_context_data(**kwargs)
+        return self.render_to_response(context, status=500)
 
 class AboutView(TemplateView):
     template_name = 'common/about_page.html'

@@ -20,5 +20,6 @@ urlpatterns = [
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 handler404 = Error404View.as_view()
+handler403 = Error404View.as_view()
 
 "adding a comment just for the commit"
