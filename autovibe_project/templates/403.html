@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block title %}
     Oops , you dont have permission to access this page.
@@ -8,8 +9,8 @@
     <div class="hero">
         <div class="text">
             <div class="wrapper">
-    <h1>You shall not pass</h1>
-    <p>Oops , you dont have permission to access this page.</p>
+    <h1>Oops.......</h1>
+                <img src="{% static 'img/gandalf.jpg' %}" alt="">
     <a href="{% url 'index' %}">
             <button class="btn">Return to AutoVibe</button>
         

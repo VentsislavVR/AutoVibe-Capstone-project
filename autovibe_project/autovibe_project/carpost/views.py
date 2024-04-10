@@ -70,7 +70,7 @@ class CarPostListView(views.ListView):
     template_name = 'cars/list_car.html'
     paginate_by = 4
 
-    # paginate_by = 10
+    ordering = '-created_at'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
