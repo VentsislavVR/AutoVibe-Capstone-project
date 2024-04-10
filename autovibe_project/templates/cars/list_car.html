@@ -9,8 +9,8 @@
 {% block content %}
 
     <section class="hero v-explore">
-        <div class="v-container" >
-            <div class="wrapper" >
+        <div class="v-container">
+            <div class="wrapper">
                 <div class="text">
                     <form action="{% url 'list_car_post' %}" method="GET">
                         <input type="text" name="q" placeholder="Find your dream car..."
@@ -24,11 +24,21 @@
                             <div class="img-container">
                                 <img class="card-img-top" src="{{ car.image.url }}" alt="{{ car.car_model }}">
                             </div>
+                            {#                            <div class="card-body">#}
+                            {#                                <h5 class="card-title">{{ car.car_model.brand }}-{{ car.car_model.model }}</h5>#}
+                            {#                                <p>Year: {{ car.year }}</p>#}
+                            {#                                <p>Price: {{ car.price }} BGN</p>#}
+                            {#                                <a href="{% url 'details_car_post' pk=car.pk %}" class="btn btn-primary">Details</a>#}
+                            {#                            </div>#}
                             <div class="card-body">
                                 <h5 class="card-title">{{ car.car_model.brand }}-{{ car.car_model.model }}</h5>
-                                <p>{{ car.car_model.model }}</p>
-                                <p>{{ car.year }}</p>
-                                <p>{{ car.price }}</p>
+                                <p><i class="fas fa-calendar"></i> {{ car.year }}</p>
+                                <p><i class="fas fa-money-bill-alt"></i> {{ car.price }} BGN</p>
+                                <!-- Additional Details (Example) -->
+                                <p class="additional-details" data-toggle="tooltip"
+                                   title="Mileage: {{ car.mileage }} km, Transmission: {{ car.transmission }}">
+                                    <i class="fas fa-info-circle"></i> More Details
+                                </p>
                                 <a href="{% url 'details_car_post' pk=car.pk %}" class="btn btn-primary">Details</a>
                             </div>
 

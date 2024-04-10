@@ -13,7 +13,6 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = os.environ.get("SECRET_KEY", 1)
 
-
 DEBUG = os.environ.get("DEBUG", "1") == "1"
 
 ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS", "").split(" ")
@@ -190,3 +189,10 @@ cloudinary.config(
     api_key=os.environ.get('API_KEY'),
     api_secret=os.environ.get('API_SECRET')
 )
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+EMAIL_HOST = os.environ.get('EMAIL_HOST')
+EMAIL_PORT = os.environ.get('EMAIL_PORT')
+EMAIL_USE_TLS = os.environ.get('EMAIL_USE_TLS')
+
+EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
