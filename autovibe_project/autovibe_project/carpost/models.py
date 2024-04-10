@@ -188,9 +188,7 @@ class CarModel(models.Model):
             ['XC90', 'XC60', 'XC70', 'XC90', 'XC60', 'XC90', 'XC90', 'XC90', 'XC90', 'XC90'],
 
     }
-    """
-    A B C D E F G H I J K L M N O P Q R S T U V W X Y Z
-    """
+
     brand = models.CharField(
         max_length=100,
         default='Pick a brand',

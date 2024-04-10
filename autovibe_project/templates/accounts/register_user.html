@@ -46,6 +46,13 @@
                         </div>
                     </div>
                     <div class="form-row">
+                        <div class="form-group">
+                            {{ form.confirm_age.label_tag }}
+                            {{ form.confirm_age }}
+                            {{ form.confirm_age.errors }}
+                        </div>
+                    </div>
+                    <div class="form-row">
                         <button type="submit" class="btn">Register</button>
                     </div>
                 </form>

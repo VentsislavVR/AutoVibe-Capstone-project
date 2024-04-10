@@ -20,8 +20,8 @@
                             <h2>{{ product.name }}</h2>
                             <p>{{ product.description }}</p>
                             <p>Price: ${{ product.price }}</p>
-                            <a href="{% url 'details_product' product.id %}" class="buy-now-button">View</a>
-                            <a class="buy-now-button" href="{% url 'add_item' product.id %}">Add to Cart</a>
+                            <a class="btn" href="{% url 'details_product' product.id %}">View Details</a>
+                            <a class="btn" href="{% url 'add_item' product.id %}" style="margin-left: 2em">Add to Cart</a>
 
                         </li>
                     {% endfor %}

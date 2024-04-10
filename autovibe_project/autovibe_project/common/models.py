@@ -14,7 +14,7 @@ class Comment(models.Model):
         on_delete=models.CASCADE
     )
 
-# Todo
+# Todo if i have the time to implement payment
 class CarPostSystemSettings(models.Model):
     MAX_BLOGS_PER_USER = models.IntegerField(
         default=3

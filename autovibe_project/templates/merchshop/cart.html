@@ -3,7 +3,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
-        /* Add CSS styles for flex container and items */
+        
         .product-list {
             display: flex;
             flex-wrap: wrap; /* Allow items to wrap to the next row if necessary */
@@ -64,7 +64,7 @@
 
                 <p>Total Price: ${{ total_price }}</p>
 
-                <a href="{% url 'merch_shop_list' %}">Continue Shopping</a>
+                <a class="btn" href="{% url 'merch_shop_list' %}">Continue Shopping</a>
             </div>
         </div>
     </div>

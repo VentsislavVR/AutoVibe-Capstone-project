@@ -1,4 +1,7 @@
+from datetime import datetime
+
 from django import forms
+from django.core.exceptions import ValidationError
 
 from autovibe_project.carpost.models import CarModel, CarPost, CarFeatures
 
@@ -39,7 +42,41 @@ class CarPostForm(forms.ModelForm):
     class Meta:
         model = CarPost
         fields = ['municipality', 'year', 'color', 'engine', 'horsepower', 'transmission', 'drive_train', 'price', 'mileage', 'vin', 'description', 'image']
-    description = forms.CharField(widget=forms.Textarea(attrs={'rows': 5, 'cols': 23}))
+
+    description = forms.CharField(
+        widget=forms.Textarea(attrs={'rows': 5, 'cols': 23, 'placeholder': 'Enter a detailed description of the car.'})
+    )
+
+
+    horsepower = forms.IntegerField(
+        label='Horsepower',
+        min_value=0,
+        max_value=10000,
+        widget=forms.NumberInput(attrs={'placeholder': 'Enter the car\'s horsepower', 'type': 'number'})
+    )
+    vin = forms.CharField(
+        label='VIN',
+        widget=forms.TextInput(attrs={'placeholder': 'Enter the car\'s VIN'})
+    )
+    year = forms.CharField(
+        label='Manufacturing Year',
+        max_length=4,
+        widget=forms.TextInput(attrs={'placeholder': 'YYYY'})
+    )
+
+    def clean_year(self):
+        year = self.cleaned_data['year']
+        if len(year) != 4 or not year.isdigit():
+            raise ValidationError("Enter a valid year in the format YYYY.")
+        year_int = int(year)
+        if year_int < 1900 or year_int > datetime.now().year + 1:
+            raise ValidationError("Year must be between 1900 and the current year.")
+        return year
+
+
+
+
+
 
     def __init__(self, *args, **kwargs):
         brand = kwargs.pop('brand', None)
@@ -55,6 +92,7 @@ class CarPostForm(forms.ModelForm):
             self.fields['model'].initial = model
 
             self.fields['model'].widget.attrs['disabled'] = True
+
 class CarFeaturesForm(forms.ModelForm):
     class Meta:
         model = CarFeatures
@@ -64,8 +102,12 @@ class CarFeaturesForm(forms.ModelForm):
             'exterior_features': forms.CheckboxSelectMultiple,
             'safety_features': forms.CheckboxSelectMultiple,
         }
+    other_features = forms.CharField(
+            widget=forms.Textarea(
+                attrs={'rows': 5, 'cols': 43, 'placeholder': 'Enter a detailed description of the car.'})
+        )
 
-    other_features = forms.CharField(widget=forms.Textarea(attrs={'rows': 5, 'cols': 20}))
+
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

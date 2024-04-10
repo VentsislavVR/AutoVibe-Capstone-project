@@ -6,42 +6,65 @@
 {% endblock %}
 
 {% block content %}
-<section class="hero v-article-list">
-<div class="wrapper">
-    <div class="text">
-        <!-- Add search form if needed -->
-    </div>
-
-    <div class="article-list">
-        {% for article in object_list %}
-            <div class="article-card" style="border: 1px solid #ccc; padding: 10px; margin-bottom: 20px;">
-                <img src="{{ article.article_img.url }}" alt="{{ article.name }}">
-                <div>
-                    <h3>{{ article.name }}</h3>
-                    <p>{{ article.content|truncatewords:20 }}. . . . . . . . </p>
-                    <a href="{% url 'article_details' pk=article.pk slug=article.slug %}" style="display: inline-block; padding: 5px 10px; background-color: red; color: #fff; text-decoration: none; border-radius: 5px;">Read More</a>
-                </div>
+    <section class="hero v-article-list">
+        <div class="wrapper">
+            <div class="text">
+                <!-- Add search form if needed -->
             </div>
-        {% endfor %}
-    </div>
 
-    <div class="pagination">
-        {% if is_paginated %}
-            <span class="step-links">
-                {% if page_obj.has_previous %}
-                    <a href="?page={{ page_obj.previous_page_number }}">previous</a>
-                {% endif %}
+            <div class="article-list">
+                {% for article in object_list %}
+                    <div class="article-card" style="border: 1px solid #ccc; padding: 10px; margin-bottom: 20px;">
+                        <img src="{{ article.article_img.url }}" alt="{{ article.name }}">
+                        <div>
+                            <h3>{{ article.name }}</h3>
+                            <p>{{ article.content|truncatewords:20 }}. . . . . . . . </p>
+                            <a href="{% url 'article_details' pk=article.pk slug=article.slug %}"
+                               style="display: inline-block; padding: 5px 10px; background-color: red; color: #fff; text-decoration: none; border-radius: 5px;">Read
+                                More</a>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
 
-                <span class="current">
-                    Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
-                </span>
+            {#    <div class="pagination">#}
+            {#        {% if is_paginated %}#}
+            {#            <span class="step-links">#}
+            {#                {% if page_obj.has_previous %}#}
+            {#                    <a class='btn btn-group-sm' href="?page={{ page_obj.previous_page_number }}">previous</a>#}
+            {#                {% endif %}#}
+            {##}
+            {#                <span class="current">#}
+            {#                    Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.#}
+            {#                </span>#}
+            {##}
+            {#                {% if page_obj.has_next %}#}
+            {#                    <a href="?page={{ page_obj.next_page_number }}">next</a>#}
+            {#                {% endif %}#}
+            {#            </span>#}
+            {#        {% endif %}#}
+            {#    </div>#}
+            <div class="pagination">
+                {% if is_paginated %}
+                    <span class="step-links">
+            {% if page_obj.has_previous %}
+                <a class='btn btn-group-sm' href="?page={{ page_obj.previous_page_number }}">Previous</a>
+            {% else %}
+                <button class='btn btn-group-sm' disabled>Previous</button>
+            {% endif %}
 
-                {% if page_obj.has_next %}
-                    <a href="?page={{ page_obj.next_page_number }}">next</a>
-                {% endif %}
+                        <span class="current">
+                Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
             </span>
-        {% endif %}
-    </div>
-</div>
-</section>
+
+                        {% if page_obj.has_next %}
+                            <a class='btn btn-group-sm' href="?page={{ page_obj.next_page_number }}">Next</a>
+                        {% else %}
+                            <button class='btn btn-group-sm' disabled>Next</button>
+                        {% endif %}
+        </span>
+                {% endif %}
+            </div>
+        </div>
+    </section>
 {% endblock %}

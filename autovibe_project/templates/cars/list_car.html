@@ -33,10 +33,10 @@
                             <div class="card-body">
                                 <h5 class="card-title">{{ car.car_model.brand }}-{{ car.car_model.model }}</h5>
                                 <p><i class="fas fa-calendar"></i> {{ car.year }}</p>
-                                <p><i class="fas fa-money-bill-alt"></i> {{ car.price }} BGN</p>
+                                <p><i class="fas fa-money-bill-alt"></i> {{ car.price|floatformat:1 }} BGN</p>
                                 <!-- Additional Details (Example) -->
                                 <p class="additional-details" data-toggle="tooltip"
-                                   title="Mileage: {{ car.mileage }} km, Transmission: {{ car.transmission }}">
+                                   title="Mileage: {{ car.mileage }} km, Transmission: {{ car.transmission }}, Color: {{ car.color }}" style="font-size: 1em">
                                     <i class="fas fa-info-circle"></i> More Details
                                 </p>
                                 <a href="{% url 'details_car_post' pk=car.pk %}" class="btn btn-primary">Details</a>
@@ -46,24 +46,26 @@
                     {% endfor %}
                 </div>
                 <div class="pagination">
-                    {% if is_paginated %}
-                        <span class="step-links">
-                {% if page_obj.has_previous %}
-                    <a href="?page=1">&laquo; first</a>
-                    <a href="?page={{ page_obj.previous_page_number }}">previous</a>
-                {% endif %}
+                {% if is_paginated %}
+                    <span class="step-links">
+            {% if page_obj.has_previous %}
+                <a class='btn btn-group-sm' href="?page={{ page_obj.previous_page_number }}">Previous</a>
+            {% else %}
+                <button class='btn btn-group-sm' disabled>Previous</button>
+            {% endif %}
 
-                            <span class="current">
-                    Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
-                </span>
-
-                            {% if page_obj.has_next %}
-                                <a href="?page={{ page_obj.next_page_number }}">next</a>
-                                <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
-                            {% endif %}
+                        <span class="current">
+                Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
             </span>
-                    {% endif %}
-                </div>
+
+                        {% if page_obj.has_next %}
+                            <a class='btn btn-group-sm' href="?page={{ page_obj.next_page_number }}">Next</a>
+                        {% else %}
+                            <button class='btn btn-group-sm' disabled>Next</button>
+                        {% endif %}
+        </span>
+                {% endif %}
+            </div>
             </div>
         </div>
     </section>
