@@ -79,15 +79,8 @@ class ProfileBaseForm(forms.ModelForm):
             'profile_picture': forms.FileInput(attrs={'accept': 'image/*'}),
             'telephone_number': forms.TextInput(attrs={'placeholder': 'Enter your telephone number'}),
         }
-    def clean_profile_picture(self):
-        profile_picture = self.cleaned_data.get('profile_picture')
-        user = self.instance.user
 
-        # Check if the user already has a profile picture
-        if user.profile.profile_picture and profile_picture:
-            raise forms.ValidationError("You can only upload one profile picture.")
 
-        return profile_picture
     def clean_date_of_birth(self):
         date_of_birth = self.cleaned_data.get('date_of_birth')
         if date_of_birth:

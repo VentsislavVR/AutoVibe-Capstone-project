@@ -14,6 +14,7 @@
                     {% csrf_token %}
                     {{ form.as_p }}
                     <button type="submit">Update</button>
+                    <a class="btn btn-danger" href="{% url 'article_delete' pk=article.pk slug=article.slug %}">Delete</a>
                 </form>
             </div>
         </div>

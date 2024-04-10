@@ -113,13 +113,16 @@
                         {% empty %}
                             <p class="no-posts">No car posts found.</p>
                         {% endfor %}
-                        <a href="{% url 'create_car_post' %}" class="btn create-post-btn">Create a new car post</a>
+                   
                     </div>
                     <!-- Buttons for Editing and Deleting the Profile -->
                     {% if object.user == request.user %}
                         <div class="form-row">
                             <a class="btn sell-btn" href="{% url 'profile_update' object.pk %}">Edit Profile</a>
                             <a class="btn" href="{% url 'profile_delete' object.pk %}">Delete Profile</a>
+                            <br>
+                            <a href="{% url 'create_car_post' %}" class="btn btn-danger">Create a new car post</a>
+
                         </div>
                     {% endif %}
                 </div>

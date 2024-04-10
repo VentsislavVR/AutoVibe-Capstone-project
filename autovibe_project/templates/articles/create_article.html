@@ -1,21 +1,80 @@
+{#{% extends 'base.html' %}#}
+{##}
+{#{% block content %}#}
+{#    {% if form.errors %}#}
+{#        <p style="color: red;">Please correct the errors below.</p>#}
+{#    {% endif %}#}
+{##}
+{##}
+{#    <div class="hero">#}
+{#        <div class="text">#}
+{#            <div class="wrapper">#}
+{#                <h4>Create Article</h4>#}
+{#                <form method="post" action="{% url 'article_create' %}" enctype="multipart/form-data">#}
+{#                    {% csrf_token %}#}
+{#                    {{ form.as_p }}#}
+{#                    <button class="btn" type="submit">Create</button>#}
+{#                </form>#}
+{#            </div>#}
+{#        </div>#}
+{#    </div>#}
+{#{% endblock %}#}
+
 {% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    Create Article - Cars
+{% endblock %}
 
 {% block content %}
-    {% if form.errors %}
-        <p style="color: red;">Please correct the errors below.</p>
-    {% endif %}
-
-
-    <div class="hero">
+    <section class="hero">
         <div class="text">
             <div class="wrapper">
                 <h4>Create Article</h4>
                 <form method="post" action="{% url 'article_create' %}" enctype="multipart/form-data">
                     {% csrf_token %}
-                    {{ form.as_p }}
-                    <button class="btn" type="submit">Create</button>
+                    <div class="form-group">
+                        {% if form.errors %}
+                            <div class="alert alert-danger" role="alert">
+                                Please correct the errors below.
+                            </div>
+                        {% endif %}
+                    </div>
+                    <div class="form-group">
+                        <label for="id_name">Title:</label>
+                        {{ form.name }}
+                        {% for error in form.name.errors %}
+                            <small class="text-danger">{{ error }}</small>
+                        {% endfor %}
+                    </div>
+                    <div class="form-group">
+                        <label for="id_content">Content:</label>
+                        {{ form.content }}
+                        {% for error in form.content.errors %}
+                            <small class="text-danger">{{ error }}</small>
+                        {% endfor %}
+                    </div>
+                    <div class="form-group" style="max-width: 250px">
+                        <label for="id_article_img">Image:</label>
+                        <div class="input-group">
+                            <div class="custom-file">
+                                {{ form.article_img }}
+                                <label class="custom-file-label" for="id_article_img">Choose file</label>
+                            </div>
+                        </div>
+                    </div>
+                
+                
+                
+                
+                
+                
+                
+                    <button class="btn btn-primary" type="submit">Create</button>
                 </form>
             </div>
         </div>
-    </div>
+    </section>
 {% endblock %}
+
