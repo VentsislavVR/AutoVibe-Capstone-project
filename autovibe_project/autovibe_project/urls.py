@@ -4,7 +4,7 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include
 
-from autovibe_project.common.views import Error404View
+from autovibe_project.common.views import Error404View, Error403View, Error500View
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -19,7 +19,7 @@ urlpatterns = [
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-handler404 = Error404View.as_view()
+handler404 = Error403View.as_view()
 handler403 = Error404View.as_view()
+handler500 = Error500View.as_view()
 
-"adding a comment just for the commit"
