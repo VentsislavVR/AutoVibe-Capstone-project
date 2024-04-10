@@ -9,6 +9,8 @@ from django.db import models
 UserModel = get_user_model()
 from multiselectfield import MultiSelectField as MSField
 from cloudinary import models as cloudinary_models
+
+
 class MultiSelectField(MSField):
     """
     Custom Implementation of MultiSelectField to achieve Django 5.0 compatibility
@@ -31,7 +33,6 @@ class MultiSelectField(MSField):
         return MSFFlatchoices(flat_choices)
 
     flatchoices = property(_get_flatchoices)
-
 
 
 # class Logo(models.Model):
@@ -93,7 +94,6 @@ class CarBrands(models.Model):
         unique=True
     )
 
-
     def __str__(self):
         return self.brand_name
 
@@ -110,30 +110,31 @@ class CarModel(models.Model):
             ['A3', 'A4', 'A6', 'A8', 'Q3', 'Q5', 'Q7', 'Q8', 'TT', 'R8'],
         'BENTLEY':
             ['Continental GT', 'Bentayga', 'Flying Spur', 'Mulsanne', 'Arnage', 'Azure', 'Brooklands', 'Turbo R',
-                    'Bentley 3 Litre', 'Mark VI'],
+             'Bentley 3 Litre', 'Mark VI'],
         'BMW':
             ['3 Series', '5 Series', '7 Series', 'X3', 'X5', 'X7', 'M3', 'M5', 'i3', 'i8'],
         'BUICK':
             ['Enclave', 'Encore', 'Envision', 'Regal', 'LaCrosse', 'Century', 'Riviera', 'Verano', 'Roadmaster',
-                  'Park Avenue'],
+             'Park Avenue'],
         'CADILLAC':
             ['Escalade', 'CTS', 'XT5', 'XTS', 'ATS', 'CT6', 'SRX', 'XT4', 'XT6', 'Eldorado'],
         'CHEVROLET':
             ['Silverado', 'Equinox', 'Malibu', 'Camaro', 'Tahoe', 'Traverse', 'Cruze', 'Impala', 'Colorado',
-                      'Suburban'],
+             'Suburban'],
         'CHRYSLER':
             ['300', 'Pacifica', 'Voyager', 'Sebring', 'Aspen', 'Crossfire', 'Concorde', 'PT Cruiser', 'LHS',
-                     'New Yorker'],
+             'New Yorker'],
         'DODGE':
             ['Charger', 'Challenger', 'Durango', 'Journey', 'Grand Caravan', 'Dart', 'Avenger', 'Caliber', 'Nitro',
-                  'Magnum'],
+             'Magnum'],
         'FERRARI':
             ['488', 'F8 Tributo', '812 Superfast', 'SF90 Stradale', 'Portofino', 'GTC4Lusso', 'Roma',
-                    'Monza SP1', 'Monza SP2', 'LaFerrari'],
+             'Monza SP1', 'Monza SP2', 'LaFerrari'],
         'FIAT':
             ['500', '500X', '500L', '124 Spider', 'Punto', 'Bravo', 'Tipo', 'Doblo', 'Freemont', 'Croma'],
         'FORD':
-            ['F-150', 'Escape', 'Explorer', 'Focus', 'Fusion', 'Mustang', 'Edge', 'Expedition', 'Taurus', 'Ranger'],
+            ['Shelby Cobra', 'F-150', 'Escape', 'Explorer', 'Focus', 'Fusion', 'Mustang', 'Edge', 'Expedition',
+             'Taurus', 'Ranger'],
         'GENESIS':
             ['G70', 'G80', 'G90', 'GV80', 'Essentia', 'Mint', 'GV70', 'Mira', 'NY', 'X Concept'],
         'GMC':
@@ -142,22 +143,54 @@ class CarModel(models.Model):
             ['Civic', 'Accord', 'CR-V', 'Pilot', 'Odyssey', 'Fit', 'HR-V', 'Ridgeline', 'Insight', 'Clarity'],
         'HYUNDAI':
             ['Elantra', 'Sonata', 'Tucson', 'Santa Fe', 'Kona', 'Palisade', 'Accent', 'Veloster', 'Ioniq',
-                    'Genesis'],
+             'Genesis'],
         'INFINITI':
             ['Q50', 'Q60', 'Q70', 'QX50', 'QX60', 'QX80', 'QX30', 'G35', 'G37', 'Q45'],
         'JAGUAR':
             ['F-PACE', 'XE', 'XF', 'XJ', 'E-PACE', 'I-PACE', 'F-TYPE', 'S-TYPE', 'XK', 'XK8'],
         'JEEP':
             ['Wrangler', 'Cherokee', 'Grand Cherokee', 'Compass', 'Renegade', 'Gladiator', 'Commander', 'Liberty',
-                 'Patriot', 'CJ-7'],
+             'Patriot', 'CJ-7'],
         'KIA':
             ['Sorento', 'Sportage', 'Soul', 'Forte', 'Optima', 'Rio', 'Cadenza', 'Stinger', 'Telluride', 'K900'],
         'LAMBORGHINI':
             ['Aventador', 'Huracan', 'Urus', 'Gallardo', 'Murcielago', 'Diablo', 'Countach', 'Miura',
-                        'Espada', 'Jarama'],
+             'Espada', 'Jarama'],
+        'LANCIA':
+            ['Delta integrale', 'Flavia', 'Dedra', 'Flavia', 'Thema', 'Ypsilon', 'Flavia', 'Ypsilon', 'Flavia',
+             'Ypsilon'],
         'LAND ROVER':
             ['Range Rover', 'Range Rover Sport', 'Range Rover Evoque', 'Discovery', 'Discovery Sport',
-                       'Defender', 'Freelander', 'Series I', ], }
+             'Defender', 'Freelander', 'Series I', ],
+        'MAZDA':
+            ['Mazda3', 'CX-5', 'CX-9', 'MX-5', 'MX-6', 'MX-5 Miata', 'MX-5 Miata', 'MX-8', 'MX-7', ],
+        'MERCEDES-BENZ':
+            ['A-Class', 'B-Class', 'C-Class', 'E-Class', 'S-Class', 'G-Class', 'G-Class', 'GL-Class', 'GLE-Class'],
+        'MITSUBISHI':
+            ['Skyline', 'Lancer', 'Eclipse', 'Lancer', 'Lancer', 'Lancer', 'Lancer', 'Lancer', 'Lancer', 'Lancer'],
+        'NISSAN':
+            ['Juke', 'Qashqai', 'X-Trail', 'Juke', 'X-Trail', 'Juke', 'Juke', 'Juke', 'X-Trail', 'Juke'],
+        'OPEL':
+            ['Corsa', 'Insignia', 'Zafira', 'Corsa', 'Zafira', 'Corsa'],
+        'PEUGEOT':
+            ['206', '207', '208', '301', '307', '308', '405', '406', '407', '408'],
+        'SEAT':
+            ['Leon', 'Ibiza', 'Toledo', 'Cordoba', 'Alhambra', 'Leon', 'Leon', 'Leon', 'Leon', 'Leon'],
+        'SKODA':
+            ['Octavia', 'Superb', 'Rapid', 'Superb', 'Superb', 'Superb', 'Superb', 'Superb', 'Superb', 'Superb'],
+        'SUBARU':
+            ['Impreza', 'Forester', 'Outbaack,'],
+        'TOYOTA':
+            ['Yaris', 'Corolla', 'Yaris', 'Yaris', 'Yaris', 'Yaris', 'Yaris', 'Yaris', 'Yaris', 'Yaris'],
+        'VOLKSWAGEN':
+            ['Golf', 'Passat', 'Tiguan', 'Passat', 'Tiguan', 'Passat', 'Tiguan', 'Passat', 'Tiguan', 'Passat'],
+        'VOLVO':
+            ['XC90', 'XC60', 'XC70', 'XC90', 'XC60', 'XC90', 'XC90', 'XC90', 'XC90', 'XC90'],
+
+    }
+    """
+    A B C D E F G H I J K L M N O P Q R S T U V W X Y Z
+    """
     brand = models.CharField(
         max_length=100,
         default='Pick a brand',
@@ -166,7 +199,6 @@ class CarModel(models.Model):
         max_length=100,
         default='Pick a model',
     )
-
 
     def __str__(self):
         return f"{self.brand} {self.model} - {self.pk}"
@@ -234,7 +266,6 @@ class CarPost(models.Model):
         ('AWD', 'AWD'),
     ]
 
-
     MAX_BRAND_NAME_LENGTH = 100
     MIN_BRAND_NAME_LENGTH = 2
 
@@ -249,7 +280,6 @@ class CarPost(models.Model):
     MAX_VIN_LENGTH = 17
 
     MIN_YEAR_VALUE = 1900
-
 
     municipality = models.CharField(
         max_length=MAX_COUNTRY_OF_ORIGIN_LENGTH,
@@ -281,7 +311,7 @@ class CarPost(models.Model):
         max_length=100,
         choices=TRANSMISSION_CHOICES,
     )
-    #Todo chage to drive train
+    # Todo chage to drive train
     drive_train = models.CharField(
 
         max_length=100,
