@@ -30,7 +30,9 @@ class LoginUserView(auth_views.LoginView):
         form.fields['username'].widget.attrs['placeholder'] = _('Email')
         form.fields['password'].widget.attrs['placeholder'] = _('Password')
         return form
-#Todo figure this out
+
+
+# Todo figure this out
 class LogoutUserView(auth_views.LogoutView):
     template_name = "accounts/logout_user.html"
     http_method_names = ["get", "post"]
@@ -42,11 +44,7 @@ class LogoutUserView(auth_views.LogoutView):
 #     return redirect('index')
 
 
-
-
-
-
-class ProfileDetailsView(auth_mixins.LoginRequiredMixin,views.DetailView):
+class ProfileDetailsView(auth_mixins.LoginRequiredMixin, views.DetailView):
     queryset = Profile.objects.prefetch_related('user').all()
     template_name = 'accounts/details_profile.html'
 
@@ -55,6 +53,7 @@ class ProfileDetailsView(auth_mixins.LoginRequiredMixin,views.DetailView):
         context['car_posts_count'] = self.object.user.carpost_set.count()
         context['car_posts'] = self.object.user.carpost_set.all()
         return context
+
 
 class ProfileUpdateView(views.UpdateView):
     queryset = Profile.objects.prefetch_related('user').all()
@@ -70,4 +69,3 @@ class ProfileDeleteView(views.DeleteView):
     template_name = 'accounts/delete_profile.html'
 
     success_url = reverse_lazy('index')
-

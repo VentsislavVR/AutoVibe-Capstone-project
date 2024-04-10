@@ -9,9 +9,6 @@ from autovibe_project.accounts.managers import AutoVibeUserManager
 
 # Create your models here.
 class AutoVibeUser(auth_models.AbstractBaseUser, auth_models.PermissionsMixin):
-    # password from `AbstractBaseUser`
-    # last_login from `AbstractBaseUser`
-
     email = models.EmailField(
         _("email address"),
         unique=True,

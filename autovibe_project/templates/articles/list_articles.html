@@ -9,13 +9,12 @@
     <section class="hero v-article-list">
         <div class="wrapper">
             <div class="text">
-                <!-- Add search form if needed -->
-            </div>
+            
 
             <div class="article-list">
                 {% for article in object_list %}
                     <div class="article-card" style="border: 1px solid #ccc; padding: 10px; margin-bottom: 20px;">
-                        <img src="{{ article.article_img.url }}" alt="{{ article.name }}">
+                        <img style="aspect-ratio: 4/3" src="{{ article.article_img.url }}" alt="{{ article.name }}">
                         <div>
                             <h3>{{ article.name }}</h3>
                             <p>{{ article.content|truncatewords:20 }}. . . . . . . . </p>
@@ -25,6 +24,7 @@
                         </div>
                     </div>
                 {% endfor %}
+            </div>
             </div>
 
             {#    <div class="pagination">#}

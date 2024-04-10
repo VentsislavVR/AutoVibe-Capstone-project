@@ -23,8 +23,6 @@ class AutoVibeUserCreationForm(auth_forms.UserCreationForm):
 
     def clean_password1(self):
         password = self.cleaned_data["password1"]
-
-        # Custom validation (e.g., minimum uppercase/lowercase characters)
         if not any(char.isupper() for char in password):
             raise ValidationError(_("Password must contain at least one uppercase letter."))
         if not any(char.islower() for char in password):
@@ -65,12 +63,6 @@ class AutoVibeUserCreationForm(auth_forms.UserCreationForm):
     class Meta(auth_forms.UserCreationForm.Meta):
         model = UserModel
         fields = ('email', 'password1', 'password2', 'confirm_age')
-
-        # widgets = {
-        #     'email': forms.EmailInput(attrs={'placeholder': 'Email'}),
-        #     'password1': forms.PasswordInput(attrs={'placeholder': 'Password'}),
-        #     'password2': forms.PasswordInput(attrs={'placeholder': 'Confirm Password'}),
-        # }
 
 
 class AutoVibeChangeForm(auth_forms.UserChangeForm):

@@ -4,6 +4,8 @@ from django.utils.text import slugify
 from cloudinary import models as cloudinary_models
 
 UserModel = get_user_model()
+
+
 class Article(models.Model):
     MAX_NAME_LENGTH = 30
 
@@ -40,7 +42,6 @@ class Article(models.Model):
             ("can_delete_article", "Can delete article"),
         ]
 
-
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
         if not self.slug:
@@ -49,5 +50,3 @@ class Article(models.Model):
 
     def __str__(self):
         return self.name
-
-

@@ -1,15 +1,12 @@
-from django.core.exceptions import ValidationError
 from django.core.files.storage import FileSystemStorage
 from django.db.models import Q
-from django.http import HttpResponse
-from django.shortcuts import redirect, get_object_or_404
+from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.views import generic as views
 from formtools.wizard.views import SessionWizardView
-from django.contrib.auth import mixins as auth_mixins
 
 from autovibe_project.carpost.forms import CarBrandModelForm, CarPostForm, CarFeaturesForm, CarUpdateForm
-from autovibe_project.carpost.models import CarModel, CarPost, CarFeatures
+from autovibe_project.carpost.models import CarModel, CarPost
 from django.contrib.auth import mixins as auth_mixins
 
 from autovibe_project.core.view_mixins import OwnerRequiredMixin

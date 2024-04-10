@@ -2,6 +2,7 @@ from django.contrib import auth
 from django.contrib.auth import models as auth_models
 from django.contrib.auth.hashers import make_password
 
+
 class AutoVibeUserManager(auth_models.BaseUserManager):
     use_in_migrations = True
 
