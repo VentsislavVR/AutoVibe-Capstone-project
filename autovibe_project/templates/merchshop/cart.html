@@ -47,10 +47,8 @@
         <div class="text">
             <div class="wrapper">
                 <h1>Your Shopping Cart</h1>
-
                 <div class="product-list">
-
-
+                
                     {% for item in cart_items %}
                         <div class="product-item">
                             <img src="{{ item.product.image.url }}" alt="{{ item.product.name }}">

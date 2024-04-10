@@ -1,8 +1,11 @@
+from django.contrib.auth.mixins import PermissionRequiredMixin
+from django.core.exceptions import ObjectDoesNotExist
 from django.urls import reverse_lazy
 from django.views import generic as views
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .models import Product, CartItem
+from django.contrib.auth import mixins as auth_mixins
 
 class MerchShopList(views.ListView):
     model = Product
@@ -19,7 +22,10 @@ class CartView(views.ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        total_price = sum(item.product.price * item.quantity for item in context['cart_items'])
+        try:
+            total_price = sum(item.product.price * item.quantity for item in context['cart_items'])
+        except ObjectDoesNotExist:
+            total_price = 0
         context['total_price'] = total_price
         return context
 
@@ -37,10 +43,11 @@ class RemoveFromCartView(views.View):
         cart_item.delete()
         return redirect('cart')
 
-class CreateProductView(views.CreateView):
+class CreateProductView(PermissionRequiredMixin,auth_mixins.LoginRequiredMixin,views.CreateView):
     model = Product
     fields = ['name', 'description', 'price', 'image']
     template_name = 'merchshop/create_product.html'
+    permission_required = 'articles.add_product'
 
     def form_valid(self, form):
         form.instance.user = self.request.user
