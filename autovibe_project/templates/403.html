@@ -9,14 +9,13 @@
     <div class="hero">
         <div class="text">
             <div class="wrapper">
-    <h1>Oops.......</h1>
-                <img src="{% static 'img/gandalf.jpg' %}" alt="">
-    <a href="{% url 'index' %}">
-            <button class="btn">Return to AutoVibe</button>
-        
-    </a>
-
-</div>
+                <h1>You shall not pass</h1>
+                <img src="{% static 'img/gandalf.jpg' %}" alt="gandalf" width="200" height="200">
+                <p>Oops , you dont have permission to access this page.</p>
+                <a href="{% url 'index' %}">
+                    <button class="btn">Return to AutoVibe</button>
+                </a>
+            </div>
         </div>
     </div>
 {% endblock %}
