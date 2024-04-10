@@ -13,7 +13,7 @@
                 {% if not request.user.is_authenticated %}
                     <a href="{% url 'login_user' %}">Login</a>
                     <a href="{% url 'register_user' %}">Register</a>
-                    <a href="#"><i class="fa-solid fa-magnifying-glass"></i></a>
+                   
                 {% else %}
                     <a href="{% url 'profile_details' pk=request.user.pk %}">Profile</a>
                     <a href="{% url 'logout_user' %}">Logout</a>
@@ -24,7 +24,10 @@
                         ){% endif %}</a>
                     <a href="{% url 'merch_shop_list' %}">Merch shop<i class="fa-solid fa-cart-shopping"></i></a>
                 {% endif %}
-                <h1 class="v-user" style="color: white">{{ request.user }}</h1>
+            {% if request.is_authenticated %}
+            	 <h1 class="v-user" style="color: white">{{ request.user }}</h1>
+            {% endif %} 
+               
             </div>
         </div>
 

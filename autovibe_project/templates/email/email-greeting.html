@@ -1,24 +1,94 @@
-{% extends 'base.html' %}
 {% load static %}
+{##}
+{#{% load static %}#}
+{##}
+{#{% block title %}#}
+{#    Welcome to AutoVibe!#}
+{#{% endblock %}#}
+{#    <div class="hero">#}
+{#        <div class="text">#}
+{#            <div class="wrapper">#}
+{#                <h1>Welcome to AutoVibe!</h1>#}
+{#                <img src="{% static 'img/Black and Green Modern Automotive Logo.png' %}" alt="AutoVibe Logo"  style="border-radius: 100%">#}
+{#                <p>Dear {{ email }},</p>#}
+{#                <p>We're excited to welcome you to AutoVibe! You are now part of our community of automotive enthusiasts.</p>#}
+{#                <p>Feel free to explore our website and discover the latest news, reviews, and discussions about cars and automotive lifestyle.</p>#}
+{#                <p>Thank you for joining AutoVibe!</p>#}
+{#                <a href="https://autovibe.azurewebsites.net/">#}
+{#                    <button class="btn btn-danger">Visit AutoVibe</button>#}
+{#                </a>#}
+{#            </div>#}
+{#        </div>#}
+{#    </div>#}
 
 {% block title %}
     Welcome to AutoVibe!
 {% endblock %}
 
-{% block content %}
-    <div class="hero">
-        <div class="text">
-            <div class="wrapper">
-                <h1>Welcome to AutoVibe!</h1>
+<style>
+  /* Black background, red and white color scheme */
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #000;
+    color: white; /* Text color */
+  }
+  .hero {
+    padding: 20px;
+  }
+  .text {
+    text-align: center;
+  }
+  h1 {
+    font-size: 24px;
+    margin-bottom: 10px;
+    color: #fff; /* White heading */
+  }
+  img {
+    width: 150px; /* Adjust image width as needed */
+    border-radius: 50%; /* Rounded image corners */
+  }
+  p {
+    font-size: 16px;
+    line-height: 1.5;
+    margin-bottom: 10px;
+    color: #fff; /* White text */
+  }
+  .btn-container {
+    text-align: center;
+    margin-top: 20px;
+  }
+  .btn {
+    background-color: #e74c3c; /* Red button color */
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer; /* Indicate clickable button */
+  }
+  .btn:hover { /* Button hover effect */
+    background-color: #c0392b;
+  }
+</style>
+
+<div class="hero">
+  <div class="text">
+    <h1>Welcome to AutoVibe, {{ email }}!</h1>
+    <img src="{% static 'img/Black and Green Modern Automotive Logo.png' %}" alt="AutoVibe Logo">
+   
                 <img src="{% static 'img/Black and Green Modern Automotive Logo.png' %}" alt="AutoVibe Logo"  style="border-radius: 100%">
                 <p>Dear {{ email }},</p>
                 <p>We're excited to welcome you to AutoVibe! You are now part of our community of automotive enthusiasts.</p>
                 <p>Feel free to explore our website and discover the latest news, reviews, and discussions about cars and automotive lifestyle.</p>
                 <p>Thank you for joining AutoVibe!</p>
-                <a href="https://autovibe.azurewebsites.net/">
-                    <button class="btn btn-danger">Visit AutoVibe</button>
-                </a>
-            </div>
-        </div>
+      
+      
+    <div class="btn-container">
+      <a href=https://autovibe.azurewebsites.net/">
+        <button class="btn">Explore AutoVibe Now!</button>
+      </a>
     </div>
-{% endblock %}
+  </div>
+</div>

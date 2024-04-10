@@ -27,10 +27,10 @@
                     {% endfor %}
                 </ul>
                 {% if perms.merchshop.add_product %}
-                    <a href="{% url 'create_product' %}">Create Product</a>
+                    <a class="btn-danger" href="{% url 'create_product' %}">Create Product</a>
                 {% endif %}
                 {% if perms.merchshop.delete_product %}
-                    <a href="{% url 'delete_product' %}">Delete Product</a>
+                    <a class="btn-danger" href="{% url 'delete_product' %}">Delete Product</a>
                 {% endif %}
 
 

@@ -1,7 +1,8 @@
 from datetime import date
 
-from django.contrib.auth import forms as auth_forms, get_user_model
+from django.contrib.auth import forms as auth_forms, get_user_model, password_validation
 from django import forms
+from django.core.exceptions import ValidationError
 from django.utils.translation import gettext_lazy as _
 from .models import Profile
 
@@ -12,7 +13,6 @@ class AutoVibeUserCreationForm(auth_forms.UserCreationForm):
     user = None
     confirm_age = forms.BooleanField(label='I confirm that I am 14 years or older')
 
-
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields['email'].widget.attrs['placeholder'] = 'Email'
@@ -20,6 +20,27 @@ class AutoVibeUserCreationForm(auth_forms.UserCreationForm):
         self.fields['password2'].widget.attrs['placeholder'] = 'Confirm Paassword'
         self.fields['password1'].help_text = None
         self.fields['password2'].help_text = None
+
+    def clean_password1(self):
+        password = self.cleaned_data["password1"]
+
+        # Custom validation (e.g., minimum uppercase/lowercase characters)
+        if not any(char.isupper() for char in password):
+            raise ValidationError(_("Password must contain at least one uppercase letter."))
+        if not any(char.islower() for char in password):
+            raise ValidationError(_("Password must contain at least one lowercase letter."))
+        if not any(char.isdigit() for char in password):
+            raise ValidationError(_("Password must contain at least one digit."))
+        if len(password) < 8:
+            raise ValidationError(_("Password must be at least 8 characters long."))
+        if len(password) > 64:
+            raise ValidationError(_("Password must be at most 64 characters long."))
+
+        errors = password_validation.validate_password(password)
+        if errors:
+            raise ValidationError(errors)
+
+        return password
 
     def clean(self):
         cleaned_data = super().clean()
@@ -35,7 +56,7 @@ class AutoVibeUserCreationForm(auth_forms.UserCreationForm):
         if date_of_birth:
             today = date.today()
             age = today.year - date_of_birth.year - (
-                        (today.month, today.day) < (date_of_birth.month, date_of_birth.day))
+                    (today.month, today.day) < (date_of_birth.month, date_of_birth.day))
             if age < 14:
                 raise forms.ValidationError("You must be at least 14 years old to register.")
 
@@ -52,12 +73,9 @@ class AutoVibeUserCreationForm(auth_forms.UserCreationForm):
         # }
 
 
-
 class AutoVibeChangeForm(auth_forms.UserChangeForm):
     class Meta(auth_forms.UserChangeForm.Meta):
         model = UserModel
-
-
 
 
 class ProfileBaseForm(forms.ModelForm):
@@ -80,15 +98,16 @@ class ProfileBaseForm(forms.ModelForm):
             'telephone_number': forms.TextInput(attrs={'placeholder': 'Enter your telephone number'}),
         }
 
-
     def clean_date_of_birth(self):
         date_of_birth = self.cleaned_data.get('date_of_birth')
         if date_of_birth:
             today = date.today()
-            age = today.year - date_of_birth.year - ((today.month, today.day) < (date_of_birth.month, date_of_birth.day))
+            age = today.year - date_of_birth.year - (
+                        (today.month, today.day) < (date_of_birth.month, date_of_birth.day))
             if age < 14:
                 raise forms.ValidationError("If you are less than 14 years old you will not be able to use AutoVibe.")
         return date_of_birth
+
+
 class ProfileUpdateForm(ProfileBaseForm):
     pass
-

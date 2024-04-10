@@ -52,8 +52,8 @@
                     {% for item in cart_items %}
                         <div class="product-item">
                             <img src="{{ item.product.image.url }}" alt="{{ item.product.name }}">
-                            <p>{{ item.product.name }} ({{ item.quantity }})</p>
-                            <p>Price: ${{ item.product.price }}</p>
+                            <p>Item: {{ item.product.name|capfirst }} | Quantity || {{ item.quantity }} ||</p>
+                            <p>Price: {{ item.product.price }} BGN</p>
                             <a href="{% url 'remove_item' item.id %}">Remove</a>
                         </div>
                     {% empty %}
@@ -62,9 +62,9 @@
 
                 </div>
 
-                <p>Total Price: ${{ total_price }}</p>
+                <p>Total Price: {{ total_price }} BGN</p>
 
-                <a class="btn" href="{% url 'merch_shop_list' %}">Continue Shopping</a>
+                <a class="btn" href="{% url 'merch_shop_list' %}">Back to Merch Shop</a>
             </div>
         </div>
     </div>
